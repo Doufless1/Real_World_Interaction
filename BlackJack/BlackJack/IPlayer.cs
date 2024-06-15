@@ -14,12 +14,14 @@ namespace BlackJack
         int HandsCompleted_ { get; set; }
         List<Card> Hand_ { get; set; }
 
+        List<List<Card>> SplitHands_ { get; set; }
+
         void AddBet(int bet);
         //void Setbet(int bet);
         void ClearBet();
-        int GetHandValue();
-        void WriteHand();
-        int WinBet(bool blackjack);
-        void AddChips();
+     public int GetHandValue();
+      public void WriteHand();
+        public int WinBet(bool blackjack);
+        public void AddChips();
     }
 }

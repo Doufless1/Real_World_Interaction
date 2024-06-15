@@ -14,8 +14,11 @@ namespace BlackJack
 
         public void RevealCard()
         {
-            RevealedCards.Add(HiddenCards[0]);
-            HiddenCards.RemoveAt(0);
+            if (HiddenCards.Count != 0)
+            {
+                RevealedCards.Add(HiddenCards[0]);
+                HiddenCards.RemoveAt(0);
+            }
         }
 
         public int GetHandValue()

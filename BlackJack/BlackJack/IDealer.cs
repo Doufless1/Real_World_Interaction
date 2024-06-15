@@ -8,12 +8,12 @@ namespace BlackJack
 {
     public interface IDealer
     {
-        List<Card> HiddenCards { get; set; }
-        List<Card> RevealedCards { get; set; }
+         List<Card> HiddenCards { get; set; }
+         List<Card> RevealedCards { get; set; }
         void RevealCard();
-        int GetHandValue();
+         int GetHandValue();
 
-        void WriteHand();
+         void WriteHand();
 
     }
 }

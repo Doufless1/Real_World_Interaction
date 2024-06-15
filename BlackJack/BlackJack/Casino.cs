@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,17 +24,58 @@ namespace BlackJack
             dealer_ = dealer;
         }
 
+
         public bool IsHandBlackjack(List<Card> hand)
         {
             if (hand.Count == 2)
             {
-                if (hand[0].Face_ == Face.Ace && hand[1].Value_ == 10) return true;
+                if (hand[0].Face_ == Face.Ace && hand[1].Value_ == 10) return true; // checks if any of the players ahnds is King Queen Jack or Ten with Ace to have a blackjack
                 else if (hand[1].Face_ == Face.Ace && hand[0].Value_ == 10) return true;
             }
             return false;
         }
+        public bool Is_Hand_for_Splitting(List<Card> hand)
+        {
+            if (hand.Count == 2)
+            {
+
+                HashSet<Face> Faces = new HashSet<Face> { Face.Ace,Face.King,Face.Queen,Face.Jack };
+                HashSet<int> Values = new HashSet<int> { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+
+                if (Faces.Contains(hand[0].Face_) && Faces.Contains(hand[1].Face_))
+                {
+                    return true;
+                }
+
+                if (Values.Contains(hand[0].Value_) && Values.Contains(hand[1].Value_))
+                {
+                    return true;
+                }
+                /*if (hand[0].Face_ == Face.Ace && hand[1].Face_ == Face.Ace) return true;
+                if (hand[0].Face_ == Face.King && hand[1].Face_ == Face.King) return true;
+                if (hand[0].Face_ == Face.Queen && hand[1].Face_ == Face.Queen) return true;
+                if (hand[0].Face_ == Face.Jack && hand[1].Face_ == Face.Jack) return true;
+                if (hand[0].Value_ == 10 && hand[1].Value_ == 10) return true;
+                if (hand[0].Value_ == 9 && hand[1].Value_ == 9) return true;
+                if (hand[0].Value_ == 8 && hand[1].Value_ == 8) return true;
+                if (hand[0].Value_ == 7 && hand[1].Value_ == 7) return true;
+                if (hand[0].Value_ == 6 && hand[1].Value_ == 6) return true;
+                if (hand[0].Value_ == 5 && hand[1].Value_ == 5) return true;
+                if (hand[0].Value_ == 4 && hand[1].Value_ == 4) return true;
+                if (hand[0].Value_ == 3 && hand[1].Value_ == 3) return true;
+                if (hand[0].Value_ == 2 && hand[1].Value_ == 2) return true;*/
+            }
+            else if(hand.Count == 1)
+            {
+                throw new InvalidProgramException("Something Went wrong in the code!!!");
+            }
+            
+            return false;
+        }
         public void InitializeHand()
         {
+            //TODO: I feel like you are doing it wrong the thing is that in poker only one of the dealers hands is down
+
             deck_.Initialize();
 
             player_.Hand_ = deck_.DealHand();
@@ -44,7 +86,7 @@ namespace BlackJack
                 player_.Hand_[1].Value_ = 1;
             }
 
-            if (dealer_.HiddenCards[0].Face_ == Face.Ace && dealer_.HiddenCards[1].Face_ == Face.Ace)
+            if (dealer_.HiddenCards[0].Face_ == Face.Ace && dealer_.HiddenCards[1].Face_ == Face.Ace) // TODO: You can be more cleare which is the hidden cards
             {
                 dealer_.HiddenCards[1].Value_ = 1;
             }
@@ -64,8 +106,9 @@ namespace BlackJack
             Console.WriteLine(MinimumBet);
 
             Console.Write("Enter bet to begin hand " + player_.HandsCompleted_ + ": ");
-            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.ForegroundColor = ConsoleColor.Magenta; // this is some function that specifies colour?
             string s = Console.ReadLine();
+            // why did u put it with Int32 why not basic int 
 
             if (Int32.TryParse(s, out int bet) && bet >= MinimumBet && player_.Chips_ >= bet)
             {
@@ -94,23 +137,44 @@ namespace BlackJack
                         break;
                     case "STAND":
                         break;
-                    case "SURRENDER":
+                    case "FOLD": // its not surrender its fold
                         player_.Hand_.Clear();
                         break;
                     case "DOUBLE":
-                        if (player_.Chips_ <= player_.Bet_)
-                        {
-                            player_.AddBet(player_.Chips_);
-                        }
-                        else
+                        // Fixed: In blackjack when u double u cant double if have less then the needed chips 
+                        if (player_.Chips_ >= player_.Bet_) // i think this is wrong
                         {
                             player_.AddBet(player_.Bet_);
                         }
+                        else
+                        {
+                            throw new InvalidOperationException("You cant DOUBLE dont have Enought Chips to do that!!!");
+                        }
                         player_.Hand_.Add(deck_.DrawCard());
+                        break;
+                    case "SPLIT":
+                        if ( Is_Hand_for_Splitting(player_.Hand_) && player_.Chips_ >= player_.Bet_)
+                        {
+                            player_.AddBet(player_.Chips_);
+                            List<Card> splitHand1 = new List<Card>() { player_.Hand_[0], deck_.DrawCard() };
+                            List<Card> splitHand2 = new List<Card>() { player_.Hand_[1], deck_.DrawCard() };
+
+                            Take_Action_After_Spitting_The_Hand(splitHand1);
+                            Take_Action_After_Spitting_The_Hand(splitHand2);
+
+
+                            player_.SplitHands_ = new List<List<Card>> { splitHand1, splitHand2 };
+                         
+                        }
+                        else
+                        {
+                            throw new InvalidOperationException("You are not able to SPLIT u need your balance to be equal to your Bet to do that");
+
+                        }
                         break;
                     default:
                         Console.WriteLine("Valid Moves:");
-                        Console.WriteLine("Hit, Stand, Surrender, Double");
+                        Console.WriteLine("Hit, Stand, Surrender, Double,Split");
                         Console.WriteLine("Press any key to continue.");
                         Console.ReadKey();
                         break;
@@ -128,13 +192,59 @@ namespace BlackJack
                     }
                 }
             } while (!action.ToUpper().Equals("STAND") && !action.ToUpper().Equals("DOUBLE")
-                && !action.ToUpper().Equals("SURRENDER") && player_.GetHandValue() <= 21);
+                && !action.ToUpper().Equals("FOLD") && player_.GetHandValue() <= 21);
+        }
+
+
+        private void Take_Action_After_Spitting_The_Hand(List<Card> hand_splitted)
+        {
+            string action;
+            do
+            {
+                Console.Clear();
+                player_.WriteHand();
+                dealer_.WriteHand();
+
+                Console.Write("Enter Action (? for help): ");
+                action = Console.ReadLine();
+
+                switch (action.ToUpper())
+                {
+                    case "HIT":
+                        player_.Hand_.Add(deck_.DrawCard());
+                        break;
+                    case "STAND":
+                        break;
+                    case "FOLD": // its not surrender its fold
+                        player_.Hand_.Clear();
+                        break;
+              
+                    default:
+                        Console.WriteLine("Valid Moves:");
+                        Console.WriteLine("Hit, Stand, Fold");
+                        Console.WriteLine("Press any key to continue.");
+                        Console.ReadKey();
+                        break;
+                }
+
+                if (player_.GetHandValue() > 21)
+                {
+                    foreach (Card card in player_.Hand_)
+                    {
+                        if (card.Value_ == 11) // Only a soft ace can have a value of 11
+                        {
+                            card.Value_ = 1;
+                            break;
+                        }
+                    }
+                }
+            } while (!action.ToUpper().Equals("STAND") && !action.ToUpper().Equals("FOLD") && player_.GetHandValue() <= 21);
         }
         public void StartRound()
         {
             Console.Clear();
 
-            if (TakeBet())
+            if (!TakeBet())
             {
                 EndRound(RoundResult.INVALID_BET);
                 return;
@@ -152,12 +262,37 @@ namespace BlackJack
 
             player_.HandsCompleted_++;
 
-            if (player_.Hand_.Count == 0)
+
+            List<List<Card>> handsToPlay = new List<List<Card>> { player_.Hand_ };
+            if (player_.SplitHands_ != null && player_.SplitHands_.Count > 0)
+            {
+                handsToPlay.AddRange(player_.SplitHands_); // we ensure that each item inside the SplitHands is added to handstoplay as individual items
+            }
+            for (int i = 0; i < handsToPlay.Count; i++)
+            {
+                player_.Hand_ = handsToPlay[i];
+                ProcessHand(player_.Hand_);
+            }
+        }
+
+
+        private int GetHandValue(List<Card> hand)
+        {
+            int value = 0;
+            foreach (Card card in hand)
+            {
+                value += card.Value_;
+            }
+            return value;
+        }
+        private void ProcessHand(List<Card> hand)
+        {
+            if (hand.Count == 0)
             {
                 EndRound(RoundResult.SURRENDER);
                 return;
             }
-            else if (player_.GetHandValue() > 21)
+            else if (GetHandValue(hand) > 21)
             {
                 EndRound(RoundResult.PLAYER_BUST);
                 return;
@@ -165,7 +300,6 @@ namespace BlackJack
 
             while (dealer_.GetHandValue() <= 16)
             {
-                //Thread.Sleep(1000);
                 dealer_.RevealedCards.Add(deck_.DrawCard());
 
                 Console.Clear();
@@ -173,11 +307,10 @@ namespace BlackJack
                 dealer_.WriteHand();
             }
 
-
-            if (player_.GetHandValue() > dealer_.GetHandValue())
+            if (GetHandValue(hand) > dealer_.GetHandValue())
             {
                 player_.Wins_++;
-                if (IsHandBlackjack(player_.Hand_))
+                if (IsHandBlackjack(hand))
                 {
                     EndRound(RoundResult.PLAYER_BLACKJACK);
                 }
@@ -191,7 +324,7 @@ namespace BlackJack
                 player_.Wins_++;
                 EndRound(RoundResult.PLAYER_WIN);
             }
-            else if (dealer_.GetHandValue() > player_.GetHandValue())
+            else if (dealer_.GetHandValue() > GetHandValue(hand))
             {
                 EndRound(RoundResult.DEALER_WIN);
             }
@@ -199,7 +332,6 @@ namespace BlackJack
             {
                 EndRound(RoundResult.PUSH);
             }
-
         }
 
         public void EndRound(RoundResult result)

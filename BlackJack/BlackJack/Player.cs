@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlackJack
 {
-    public class Player: IPlayer
+    public class Player : IPlayer
     {
         //public string Name_="";
         public int Chips_ { get ; set; } = 500;
@@ -16,9 +16,13 @@ namespace BlackJack
 
         public List<Card> Hand_ {  get; set; }
 
+        public List<List<Card>> SplitHands_ { get; set; }
+
+
         public Player() 
         {
             Hand_ = new List<Card>();
+            SplitHands_ = new List<List<Card>>();
             Hand_.Clear();
         }
 
