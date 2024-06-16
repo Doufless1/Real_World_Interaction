@@ -218,7 +218,17 @@ namespace BlackJack
                     case "FOLD": // its not surrender its fold
                         player_.Hand_.Clear();
                         break;
-              
+                    case "DOUBLE":
+                        if (player_.Chips_ >= player_.Bet_)
+                        {
+                            player_.AddBet(player_.Bet_);
+                        }
+                        else
+                        {
+                            throw new InvalidOperationException("You cant DOUBLE dont have Enought Chips to do that!!!");
+                        }
+                        player_.Hand_.Add(deck_.DrawCard());
+                        break;
                     default:
                         Console.WriteLine("Valid Moves:");
                         Console.WriteLine("Hit, Stand, Fold");
@@ -238,7 +248,8 @@ namespace BlackJack
                         }
                     }
                 }
-            } while (!action.ToUpper().Equals("STAND") && !action.ToUpper().Equals("FOLD") && player_.GetHandValue() <= 21);
+            } while (!action.ToUpper().Equals("STAND") && !action.ToUpper().Equals("FOLD") && !action.ToUpper().Equals("DOUBLE")
+                && player_.GetHandValue() <= 21);
         }
         public void StartRound()
         {

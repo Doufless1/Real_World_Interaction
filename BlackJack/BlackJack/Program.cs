@@ -1,7 +1,14 @@
-﻿/*using BlackJack;
+﻿using BlackJack;
 using System.Numerics;
 using System.Text;
 
+
+/// TOOD: TEST THE CODE MORE MAKE IT MORE EFFICIENT AND PRETTY
+/// TODO: ASK THE TEACHERS FOR FEEDBACK
+/// TODO: IMPLIMNENT SERVER
+/// TODO: MAKE THE GUI
+/// TODO: IMPLEMENT INSURANCE
+/// FIX: THE CODE
 
 namespace BlackJack
 {
@@ -29,9 +36,9 @@ namespace BlackJack
     
 }
 
-    */
+   
 
-using System;
+/*using System;
 
 namespace BlackJack
 {
@@ -90,7 +97,7 @@ namespace BlackJack
             // Determine outcome based on Blackjack rules
             if (dealer.GetHandValue() > 21)
             {
-                Console.WriteLine("Dealer busts, player wins if not busted");
+                Console.WriteLine("Dealer busts, player wins if not busted");a
             }
             else if (player.GetHandValue() > 21)
             {
@@ -109,5 +116,4 @@ namespace BlackJack
                 Console.WriteLine("Push");
             }
         }
-    }
-}
+    }*/
