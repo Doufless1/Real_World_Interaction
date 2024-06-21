@@ -69,14 +69,14 @@ namespace Batman
             return chipsWon;
         }
 
-        public void WriteHand()
+     /*   public void WriteHand()
         {
             Console.WriteLine($"Players's Hand ( {GetHandValue()} ):");
             foreach (Card card in Hand_)
             {
            //     card.Description();
             }
-        }
+        }*/
 
 
 

@@ -1,49 +1,68 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\kokoa\\source\\repos\\Batman\\",
+  "WorkspaceRootPath": "C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|c:\\users\\kokoa\\source\\repos\\batman\\batman\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|c:\\real_world_interaction\\real_world_interaction\\batman\\batman\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|solutionrelative:batman\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|C:\\Users\\kokoa\\source\\repos\\Batman\\batman\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|solutionrelative:batman\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|c:\\real_world_interaction\\real_world_interaction\\batman\\batman\\mainwindow.xaml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|solutionrelative:batman\\mainwindow.xaml||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|C:\\Users\\kokoa\\source\\repos\\Batman\\batman\\viewmodels\\blackjackviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|solutionrelative:batman\\viewmodels\\blackjackviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|C:\\Users\\kokoa\\source\\repos\\Batman\\batman\\interfaces\\ideck.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|solutionrelative:batman\\interfaces\\ideck.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|C:\\Users\\kokoa\\source\\repos\\Batman\\batman\\models\\deck.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|solutionrelative:batman\\models\\deck.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|C:\\Users\\kokoa\\source\\repos\\Batman\\batman\\models\\card.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|solutionrelative:batman\\models\\card.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|C:\\Users\\kokoa\\source\\repos\\Batman\\batman\\interfaces\\iplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|solutionrelative:batman\\interfaces\\iplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|C:\\Users\\kokoa\\source\\repos\\Batman\\batman\\models\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|solutionrelative:batman\\models\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|C:\\Users\\kokoa\\source\\repos\\Batman\\batman\\gamelogic\\casino.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|c:\\real_world_interaction\\real_world_interaction\\batman\\batman\\gamelogic\\casino.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|solutionrelative:batman\\gamelogic\\casino.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\batman\\viewmodels\\blackjackviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|solutionrelative:batman\\viewmodels\\blackjackviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|C:\\Users\\kokoa\\source\\repos\\Batman\\batman\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\batman\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|solutionrelative:batman\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\batman\\startwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|solutionrelative:batman\\startwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\batman\\startwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|solutionrelative:batman\\startwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\dotnet\\sdk\\8.0.205\\Sdks\\Microsoft.NET.Sdk.WindowsDesktop\\targets\\Microsoft.WinFX.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\batman\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|solutionrelative:batman\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\batman\\batman.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|solutionrelative:batman\\batman.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\batman\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|solutionrelative:batman\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\batman\\assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|solutionrelative:batman\\assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\dotnet\\sdk\\8.0.205\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.NET.Sdk.DefaultItems.Shared.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\batman\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|solutionrelative:batman\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\batman\\interfaces\\iplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|solutionrelative:batman\\interfaces\\iplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\batman\\models\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|solutionrelative:batman\\models\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -53,139 +72,227 @@
       "DocumentGroups": [
         {
           "DockedWidth": 458,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Casino.cs",
+              "DocumentMoniker": "C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\Batman\\GameLogic\\Casino.cs",
+              "RelativeDocumentMoniker": "Batman\\GameLogic\\Casino.cs",
+              "ToolTip": "C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\Batman\\GameLogic\\Casino.cs",
+              "RelativeToolTip": "Batman\\GameLogic\\Casino.cs",
+              "ViewState": "AQIAAD8BAAAAAAAAAAAuwO4AAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-21T09:09:08.383Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\kokoa\\source\\repos\\Batman\\Batman\\MainWindow.xaml",
+              "DocumentMoniker": "C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\Batman\\MainWindow.xaml",
               "RelativeDocumentMoniker": "Batman\\MainWindow.xaml",
-              "ToolTip": "C:\\Users\\kokoa\\source\\repos\\Batman\\Batman\\MainWindow.xaml",
+              "ToolTip": "C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\Batman\\MainWindow.xaml",
               "RelativeToolTip": "Batman\\MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-06-18T18:13:07.257Z",
+              "WhenOpened": "2024-06-19T12:24:55.969Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BlackJackViewModel.cs",
+              "DocumentMoniker": "C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\Batman\\ViewModels\\BlackJackViewModel.cs",
+              "RelativeDocumentMoniker": "Batman\\ViewModels\\BlackJackViewModel.cs",
+              "ToolTip": "C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\Batman\\ViewModels\\BlackJackViewModel.cs",
+              "RelativeToolTip": "Batman\\ViewModels\\BlackJackViewModel.cs",
+              "ViewState": "AQIAAIMAAAAAAAAAAAA8wKoAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-18T15:24:23.064Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "Deck.cs",
-              "DocumentMoniker": "C:\\Users\\kokoa\\source\\repos\\Batman\\Batman\\Models\\Deck.cs",
-              "RelativeDocumentMoniker": "Batman\\Models\\Deck.cs",
-              "ToolTip": "C:\\Users\\kokoa\\source\\repos\\Batman\\Batman\\Models\\Deck.cs",
-              "RelativeToolTip": "Batman\\Models\\Deck.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-18T17:59:42.655Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "IPlayer.cs",
-              "DocumentMoniker": "C:\\Users\\kokoa\\source\\repos\\Batman\\Batman\\Interfaces\\IPlayer.cs",
-              "RelativeDocumentMoniker": "Batman\\Interfaces\\IPlayer.cs",
-              "ToolTip": "C:\\Users\\kokoa\\source\\repos\\Batman\\Batman\\Interfaces\\IPlayer.cs",
-              "RelativeToolTip": "Batman\\Interfaces\\IPlayer.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAcwBUAAAAfAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-18T17:57:55.058Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "IDeck.cs",
-              "DocumentMoniker": "C:\\Users\\kokoa\\source\\repos\\Batman\\Batman\\Interfaces\\IDeck.cs",
-              "RelativeDocumentMoniker": "Batman\\Interfaces\\IDeck.cs",
-              "ToolTip": "C:\\Users\\kokoa\\source\\repos\\Batman\\Batman\\Interfaces\\IDeck.cs",
-              "RelativeToolTip": "Batman\\Interfaces\\IDeck.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAABcAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-18T17:57:54.509Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Card.cs",
-              "DocumentMoniker": "C:\\Users\\kokoa\\source\\repos\\Batman\\Batman\\Models\\Card.cs",
-              "RelativeDocumentMoniker": "Batman\\Models\\Card.cs",
-              "ToolTip": "C:\\Users\\kokoa\\source\\repos\\Batman\\Batman\\Models\\Card.cs",
-              "RelativeToolTip": "Batman\\Models\\Card.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-18T17:54:22.11Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "BlackJackViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\kokoa\\source\\repos\\Batman\\Batman\\ViewModels\\BlackJackViewModel.cs",
-              "RelativeDocumentMoniker": "Batman\\ViewModels\\BlackJackViewModel.cs",
-              "ToolTip": "C:\\Users\\kokoa\\source\\repos\\Batman\\Batman\\ViewModels\\BlackJackViewModel.cs",
-              "RelativeToolTip": "Batman\\ViewModels\\BlackJackViewModel.cs",
-              "ViewState": "AQIAABQAAAAAAAAAAAAgwAoAAAAHAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-18T15:24:23.064Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\kokoa\\source\\repos\\Batman\\Batman\\MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\Batman\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "Batman\\MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\kokoa\\source\\repos\\Batman\\Batman\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\Batman\\MainWindow.xaml.cs",
               "RelativeToolTip": "Batman\\MainWindow.xaml.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAfAAAA",
+              "ViewState": "AQIAAAUAAAAAAAAAAAApwA8AAAASAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-18T10:44:02.977Z"
+              "WhenOpened": "2024-06-20T13:13:56.522Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "Player.cs",
-              "DocumentMoniker": "C:\\Users\\kokoa\\source\\repos\\Batman\\Batman\\Models\\Player.cs",
-              "RelativeDocumentMoniker": "Batman\\Models\\Player.cs",
-              "ToolTip": "C:\\Users\\kokoa\\source\\repos\\Batman\\Batman\\Models\\Player.cs",
-              "RelativeToolTip": "Batman\\Models\\Player.cs",
-              "ViewState": "AQIAADAAAAAAAAAAAAAiwAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-18T17:58:06.358Z"
+              "Title": "Microsoft.WinFX.targets",
+              "DocumentMoniker": "C:\\Program Files\\dotnet\\sdk\\8.0.205\\Sdks\\Microsoft.NET.Sdk.WindowsDesktop\\targets\\Microsoft.WinFX.targets",
+              "RelativeDocumentMoniker": "..\\..\\..\\Program Files\\dotnet\\sdk\\8.0.205\\Sdks\\Microsoft.NET.Sdk.WindowsDesktop\\targets\\Microsoft.WinFX.targets",
+              "ToolTip": "C:\\Program Files\\dotnet\\sdk\\8.0.205\\Sdks\\Microsoft.NET.Sdk.WindowsDesktop\\targets\\Microsoft.WinFX.targets",
+              "RelativeToolTip": "..\\..\\..\\Program Files\\dotnet\\sdk\\8.0.205\\Sdks\\Microsoft.NET.Sdk.WindowsDesktop\\targets\\Microsoft.WinFX.targets",
+              "ViewState": "AQIAALQCAAAAAAAAAAAewMECAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
+              "WhenOpened": "2024-06-21T08:29:18.208Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Casino.cs",
-              "DocumentMoniker": "C:\\Users\\kokoa\\source\\repos\\Batman\\Batman\\GameLogic\\Casino.cs",
-              "RelativeDocumentMoniker": "Batman\\GameLogic\\Casino.cs",
-              "ToolTip": "C:\\Users\\kokoa\\source\\repos\\Batman\\Batman\\GameLogic\\Casino.cs",
-              "RelativeToolTip": "Batman\\GameLogic\\Casino.cs",
-              "ViewState": "AQIAACAAAAAAAAAAAAAgwCQAAAAUAAAA",
+              "DocumentIndex": 12,
+              "Title": "Microsoft.NET.Sdk.DefaultItems.Shared.targets",
+              "DocumentMoniker": "C:\\Program Files\\dotnet\\sdk\\8.0.205\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.NET.Sdk.DefaultItems.Shared.targets",
+              "RelativeDocumentMoniker": "..\\..\\..\\Program Files\\dotnet\\sdk\\8.0.205\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.NET.Sdk.DefaultItems.Shared.targets",
+              "ToolTip": "C:\\Program Files\\dotnet\\sdk\\8.0.205\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.NET.Sdk.DefaultItems.Shared.targets",
+              "RelativeToolTip": "..\\..\\..\\Program Files\\dotnet\\sdk\\8.0.205\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.NET.Sdk.DefaultItems.Shared.targets",
+              "ViewState": "AQIAAKsAAAAAAAAAAAAjwL0AAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
+              "WhenOpened": "2024-06-20T15:03:45.222Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "StartWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\Batman\\StartWindow.xaml.cs",
+              "RelativeDocumentMoniker": "Batman\\StartWindow.xaml.cs",
+              "ToolTip": "C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\Batman\\StartWindow.xaml.cs",
+              "RelativeToolTip": "Batman\\StartWindow.xaml.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAlwAsAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-18T17:54:29.668Z"
+              "WhenOpened": "2024-06-20T13:14:05.243Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "StartWindow.xaml",
+              "DocumentMoniker": "C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\Batman\\StartWindow.xaml",
+              "RelativeDocumentMoniker": "Batman\\StartWindow.xaml",
+              "ToolTip": "C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\Batman\\StartWindow.xaml",
+              "RelativeToolTip": "Batman\\StartWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-06-20T13:12:36.963Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 9,
-              "Title": "Microsoft.Common.CurrentVersion.targets",
-              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
-              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
-              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
-              "RelativeToolTip": "..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
-              "ViewState": "AQIAAHYUAAAAAAAAAADwv4UUAAAEAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
-              "WhenOpened": "2024-06-18T17:33:34.133Z"
+              "Title": "Batman.csproj",
+              "DocumentMoniker": "C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\Batman\\Batman.csproj",
+              "RelativeDocumentMoniker": "Batman\\Batman.csproj",
+              "ToolTip": "C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\Batman\\Batman.csproj",
+              "RelativeToolTip": "Batman\\Batman.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-06-19T09:31:41.691Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "App.xaml",
+              "DocumentMoniker": "C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\Batman\\App.xaml",
+              "RelativeDocumentMoniker": "Batman\\App.xaml",
+              "ToolTip": "C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\Batman\\App.xaml",
+              "RelativeToolTip": "Batman\\App.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-06-20T13:10:57.243Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "AssemblyInfo.cs",
+              "DocumentMoniker": "C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\Batman\\AssemblyInfo.cs",
+              "RelativeDocumentMoniker": "Batman\\AssemblyInfo.cs",
+              "ToolTip": "C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\Batman\\AssemblyInfo.cs",
+              "RelativeToolTip": "Batman\\AssemblyInfo.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-20T11:38:44.667Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 10,
+              "Title": "App.xaml.cs",
+              "DocumentMoniker": "C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\Batman\\App.xaml.cs",
+              "RelativeDocumentMoniker": "Batman\\App.xaml.cs",
+              "ToolTip": "C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\Batman\\App.xaml.cs",
+              "RelativeToolTip": "Batman\\App.xaml.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-20T13:10:55.369Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\kokoa\\source\\repos\\Batman\\Batman\\Program.cs",
+              "DocumentMoniker": "C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\Batman\\Program.cs",
               "RelativeDocumentMoniker": "Batman\\Program.cs",
-              "ToolTip": "C:\\Users\\kokoa\\source\\repos\\Batman\\Batman\\Program.cs",
+              "ToolTip": "C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\Batman\\Program.cs",
               "RelativeToolTip": "Batman\\Program.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-18T16:00:17.308Z"
+              "WhenOpened": "2024-06-20T14:57:45.601Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Player.cs",
+              "DocumentMoniker": "C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\Batman\\Models\\Player.cs",
+              "RelativeDocumentMoniker": "Batman\\Models\\Player.cs",
+              "ToolTip": "C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\Batman\\Models\\Player.cs",
+              "RelativeToolTip": "Batman\\Models\\Player.cs",
+              "ViewState": "AQIAADEAAAAAAAAAAAD4v04AAAALAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-20T10:36:28.816Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "IPlayer.cs",
+              "DocumentMoniker": "C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\Batman\\Interfaces\\IPlayer.cs",
+              "RelativeDocumentMoniker": "Batman\\Interfaces\\IPlayer.cs",
+              "ToolTip": "C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\Batman\\Interfaces\\IPlayer.cs",
+              "RelativeToolTip": "Batman\\Interfaces\\IPlayer.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAMwBYAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-20T10:37:00.089Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "FloatingWindowState": {
+        "Id": "d3f8be7f-8ea5-4fe4-9ec7-f8357d7c88ed",
+        "Display": 0,
+        "X": -1,
+        "Y": 52,
+        "Width": 802,
+        "Height": 601,
+        "WindowState": 2
+      },
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\Batman\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "Batman\\MainWindow.xaml",
+              "ToolTip": "C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\Batman\\MainWindow.xaml",
+              "RelativeToolTip": "Batman\\MainWindow.xaml",
+              "ViewState": "AQIAABYAAAAAAAAAAAAMwDMAAAAKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-06-21T08:58:11.352Z",
+              "EditorCaption": ""
             }
           ]
         }

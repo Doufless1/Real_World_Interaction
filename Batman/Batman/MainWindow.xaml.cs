@@ -9,7 +9,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Batman.ViewModels;
 namespace Batman.ViewModels
 {
     /// <summary>
@@ -21,14 +20,8 @@ namespace Batman.ViewModels
         {
             InitializeComponent();
             DataContext = new BlackJackViewModel();
-            
-
         }
 
-        private void TextBlock_MouseEnter(object sender, MouseEventArgs e)
-        {
-
-        }
-
+  
     }
 }

@@ -77,7 +77,7 @@ namespace Batman.Enums
 
             return false;
         }
-        public void InitializeHand()
+        public void InitializeHand(string starting_the_round)
         {
             //TODO: I feel like you are doing it wrong the thing is that in poker only one of the dealers hands is down
 
@@ -97,15 +97,15 @@ namespace Batman.Enums
             }
 
             dealer_.RevealCard();
-            player_.WriteHand();
-            dealer_.WriteHand();
+           /* player_.WriteHand();
+            dealer_.WriteHand();*/
         }
 
-        public bool TakeBet(int bet)
+        public bool TakeBet(string bet_in_string)
         {
     
             // why did u put it with Int32 why not basic int 
-
+            int bet = Int32.Parse(bet_in_string);
             if (bet >= MinimumBet && player_.Chips_ >= bet)
             {
                 player_.AddBet(bet);
@@ -230,19 +230,19 @@ namespace Batman.Enums
         }*/
         public void StartRound()
         {
-            if (TakeBet(9))
+            if (TakeBet("9"))
             {
                 EndRound(RoundResult.INVALID_BET);
                 return;
             }
  
-            InitializeHand();
+          //  InitializeHand();
 
             dealer_.RevealCard();
 
 
-            player_.WriteHand();
-            dealer_.WriteHand();
+            /*player_.WriteHand();
+            dealer_.WriteHand();*/
 
             player_.HandsCompleted_++;
 
@@ -286,9 +286,9 @@ namespace Batman.Enums
             {
                 dealer_.RevealedCards.Add(deck_.DrawCard());
 
-
+/*
                 player_.WriteHand();
-                dealer_.WriteHand();
+                dealer_.WriteHand();*/
             }
 
             if (GetHandValue(hand) > dealer_.GetHandValue())

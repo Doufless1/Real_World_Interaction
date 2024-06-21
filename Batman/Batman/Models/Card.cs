@@ -8,10 +8,10 @@ namespace Batman
 {
     public class Card
     {
-        public Suit Suit_ { get; }
+        public Suit Suit_ { get; set; }
         public Face Face_ { get; }
         public int Value_ { get; set; }
-        public string ImageofCards => $"Images/{Suit_.ToString().ToLower()}{Face_.ToString().ToLower()}.gif";
+       /* public string ImageofCards => $"Images/{Suit_.ToString().ToLower()}{Face_.ToString().ToLower()}.gif";*/
 
         public Card(Suit suit, Face face)
         {

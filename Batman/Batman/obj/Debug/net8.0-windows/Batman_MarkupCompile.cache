@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\kokoa\source\repos\Batman\Batman\obj\Debug\net8.0-windows\
+C:\Real_World_Interaction\Real_World_Interaction\Batman\Batman\obj\Debug\net8.0-windows\
 Batman
 none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
-C:\Users\kokoa\source\repos\Batman\Batman\App.xaml
-11407045341
-
-17558404691
+C:\Real_World_Interaction\Real_World_Interaction\Batman\Batman\App.xaml
+2-1149895725
+3-578304169
+18620696873
 199-1351330624
-MainWindow.xaml;
+MainWindow.xaml;StartWindow.xaml;
 
 False
 

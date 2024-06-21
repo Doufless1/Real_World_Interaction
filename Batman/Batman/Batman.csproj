@@ -8,8 +8,47 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+
+	<ItemGroup>
+		<Resource Include="Pictures\*.gif" />
+		<None Remove="Pictures\backgreen.png" />
+		<None Remove="Pictures\background.jpg" />
+		<None Remove="Pictures\splashpage.jpg" />
+		<EmbeddedResource Include="Pictures\cardskin.png" />
+		<EmbeddedResource Include="Pictures\5100.webp" />
+	</ItemGroup>
+	
+  <ItemGroup>
+    <Content Include="bin\Debug\net8.0-windows\Pictures\cardskin.png" />
+    <Content Include="Pictures\cardskin.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bin\Debug\net8.0-windows\Pictures\5100.webp" />
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Resource Include="Pictures\5100.webp" />
+    <Resource Include="Pictures\backgreen.png" />
+    <Resource Include="Pictures\background.jpg" />
+    <Resource Include="Pictures\cl1.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Content Include="Pictures\splashpage.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Update="Pictures\coin1.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Update="Pictures\coin2.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
 </Project>

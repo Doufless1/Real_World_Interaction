@@ -20,7 +20,7 @@ namespace Batman
         //void Setbet(int bet);
         void ClearBet();
         public int GetHandValue();
-        public void WriteHand();
+       // public void WriteHand();
         public int WinBet(bool blackjack);
         public void AddChips();
     }

@@ -19,11 +19,11 @@ namespace Batman
             for (int k = 0; k < 2; k++)
             {
 
-                for (int i = 0; i < 13; i++)
+                foreach (Suit suit in Enum.GetValues(typeof(Suit)))
                 {
-                    for (int j = 0; j < 4; j++)
+                    foreach (Face face in Enum.GetValues(typeof(Face)))
                     {
-                        deck.Add(new Card((Suit)j, (Face)i));
+                        deck.Add(new Card(suit, face));
                     }
                 }
             }
