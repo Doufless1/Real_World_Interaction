@@ -21,7 +21,5 @@ namespace Batman.ViewModels
             InitializeComponent();
             DataContext = new BlackJackViewModel();
         }
-
-  
     }
 }

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Batman")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+173d856a802b0d04be9015c18f7aeadc0ce8ef2f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b4fbc3e25163e6092bd9d6a0542b7d45e30dbc39")]
 [assembly: System.Reflection.AssemblyProductAttribute("Batman")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Batman")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

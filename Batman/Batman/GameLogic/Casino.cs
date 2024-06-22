@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Reflection.Metadata;
+using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Media.Animation;
 
 namespace Batman.Enums
 {
@@ -15,7 +18,8 @@ namespace Batman.Enums
         private IPlayer player_;// = new Player();
         private IDealer dealer_;
 
-
+        public EventHandler<string> RoundEnded;
+    
 
         public Casino(IDeck deck, IPlayer player, IDealer dealer)
         {
@@ -24,6 +28,11 @@ namespace Batman.Enums
             dealer_ = dealer;
         }
 
+
+        public void OnRoundEnded(string message)
+        {
+            RoundEnded?.Invoke(this, message);
+        }
 
         public bool IsHandBlackjack(List<Card> hand)
         {
@@ -77,6 +86,15 @@ namespace Batman.Enums
 
             return false;
         }
+       private void AdjustAceValue(List<Card> hand)
+        {
+            if (hand.Count == 2 && hand.All(card => card.Face_ == Face.Ace))
+            {
+                hand[1].Value_ = 1;
+            }
+        }
+
+       
         public void InitializeHand(string starting_the_round)
         {
             //TODO: I feel like you are doing it wrong the thing is that in poker only one of the dealers hands is down
@@ -84,19 +102,14 @@ namespace Batman.Enums
             deck_.Initialize();
 
             player_.Hand_ = deck_.DealHand();
-            dealer_.HiddenCards = deck_.DealHand();
+            dealer_.HiddenCards = new List<Card> {deck_.DrawCard()};
+            dealer_.RevealedCards = new List<Card> { deck_.DrawCard()};
 
-            if (player_.Hand_[0].Face_ == Face.Ace && player_.Hand_[1].Face_ == Face.Ace)
-            {
-                player_.Hand_[1].Value_ = 1;
-            }
+            AdjustAceValue(dealer_.HiddenCards);
+            AdjustAceValue(dealer_.RevealedCards);
 
-            if (dealer_.HiddenCards[0].Face_ == Face.Ace && dealer_.HiddenCards[1].Face_ == Face.Ace) // TODO: You can be more cleare which is the hidden cards
-            {
-                dealer_.HiddenCards[1].Value_ = 1;
-            }
-
-            dealer_.RevealCard();
+            
+    //      dealer_.RevealCard(dealer_.RevealedCards);
            /* player_.WriteHand();
             dealer_.WriteHand();*/
         }
@@ -106,7 +119,7 @@ namespace Batman.Enums
     
             // why did u put it with Int32 why not basic int 
             int bet = Int32.Parse(bet_in_string);
-            if (bet >= MinimumBet && player_.Chips_ >= bet)
+            if( player_.Chips_ >= bet)
             {
                 player_.AddBet(bet);
                 return true;
@@ -116,17 +129,20 @@ namespace Batman.Enums
 
         public void TakeActions(string action)
         {
+             bool hit = false;
             do
             {
                 switch (action.ToUpper())
                 {
                     case "HIT":
                         player_.Hand_.Add(deck_.DrawCard());
-                        break;
+                        hit = true;
+                         break;
                     case "STAND":
                         break;
                     case "FOLD": // its not surrender its fold
                         player_.Hand_.Clear();
+                        dealer_.RevealedCards.Clear();
                         break;
                     case "DOUBLE":
                         // Fixed: In blackjack when u double u cant double if have less then the needed chips 
@@ -176,7 +192,7 @@ namespace Batman.Enums
                     }
                 }
             } while (!action.ToUpper().Equals("STAND") && !action.ToUpper().Equals("DOUBLE")
-                && !action.ToUpper().Equals("FOLD") && player_.GetHandValue() <= 21);
+                && !action.ToUpper().Equals("FOLD") && player_.GetHandValue() <= 21 && hit != true);
         }
 
 
@@ -238,7 +254,7 @@ namespace Batman.Enums
  
           //  InitializeHand();
 
-            dealer_.RevealCard();
+        //   dealer_.RevealCard();
 
 
             /*player_.WriteHand();
@@ -258,8 +274,6 @@ namespace Batman.Enums
                 ProcessHand(player_.Hand_);
             }
         }
-
-
         private int GetHandValue(List<Card> hand)
         {
             int value = 0;
@@ -269,7 +283,7 @@ namespace Batman.Enums
             }
             return value;
         }
-        private void ProcessHand(List<Card> hand)
+        public void ProcessHand(List<Card> hand)
         {
             if (hand.Count == 0)
             {
@@ -310,6 +324,7 @@ namespace Batman.Enums
             }
             else if (dealer_.GetHandValue() > GetHandValue(hand))
             {
+                //UpdateCardDisplayForDealer();
                 EndRound(RoundResult.DEALER_WIN);
             }
             else
@@ -320,41 +335,48 @@ namespace Batman.Enums
 
         public void EndRound(RoundResult result)
         {
+            string message = "";
             switch (result)
             {
                 case RoundResult.PUSH:
                     player_.AddChips();
-                    Console.WriteLine("Player and Dealer Push.");
+                  
+                    message = "Player and Dealer Push.";
                     break;
                 case RoundResult.PLAYER_WIN:
-                    Console.WriteLine("Player Wins " + player_.WinBet(false) + " chips");
+                    message = $"Player Wins {player_.WinBet(false)}chips";
+                   
                     break;
                 case RoundResult.PLAYER_BUST:
-                    player_.ClearBet();
-                    Console.WriteLine("Player Busts");
+
+                    message = "Player Busts";
                     break;
                 case RoundResult.PLAYER_BLACKJACK:
-                    Console.WriteLine("Player Wins " + player_.WinBet(true) + " chips with Blackjack.");
+                    message = $"Player Wins {player_.WinBet(true)}chips";               
+                  
                     break;
                 case RoundResult.DEALER_WIN:
                     player_.ClearBet();
-                    Console.WriteLine("Dealer Wins.");
+                   
+                    message = "Dealer Wins.";
                     break;
                 case RoundResult.SURRENDER:
-                    Console.WriteLine("Player Surrenders " + (player_.Bet_ / 2) + " chips");
+                    message = $"Player Surrenders {player_.Bet_ / 2} chips";
                     player_.Chips_ += player_.Bet_ / 2;
                     player_.ClearBet();
                     break;
                 case RoundResult.INVALID_BET:
-                    Console.WriteLine("Invalid Bet.");
+                    message = "Invalid Bet.";
                     break;
             }
 
             if (player_.Chips_ <= 0)
             {
+                message = "Player is going broke";
                 player_ = new Player();
             }
-            StartRound();
+            OnRoundEnded(message);
+        //    StartRound();
         }
 
     }

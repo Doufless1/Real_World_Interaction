@@ -29,7 +29,13 @@ namespace Batman
         public void AddBet(int bet)
         {
             Bet_ += bet;
-            Chips_ -= bet;
+            if (Chips_ - bet >= 0)
+            {
+                Chips_ -= bet;
+            } else
+            {
+                throw new InvalidOperationException("Not enough chips to place bet.");
+            }
         }
 
         public void Setbet(int bet) { Bet_ = bet; }
@@ -45,9 +51,24 @@ namespace Batman
         public int GetHandValue()
         {
             int value = 0;
+            int Ace_counter = 0;
             foreach (Card card in Hand_)
             {
-                value += card.Value_;
+                if (card.Face_ == Enums.Face.Ace)
+                {
+                    value += 11;
+                    Ace_counter++;
+                }
+                else
+                {
+                    value += card.Value_;
+                }
+            }
+            while (value > 21 && Ace_counter > 0)
+            {
+                value -= 10;
+                Ace_counter--;
+
             }
             return value;
         }

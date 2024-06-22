@@ -9,19 +9,17 @@
         Height="Auto"
         Width="Auto">
 
-  
-
     <Grid>
         <!-- Background Image -->
         <Image Source="pack://application:,,,/Pictures/backgreen.png" Stretch="UniformToFill" />
 
         <!-- Foreground Content -->
-        <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="800" Height="500">
+        <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="800" Height="800">
             <!-- Background image for the table -->
             <Image Source="pack://application:,,,/Pictures/background.jpg" Stretch="UniformToFill" />
 
             <!-- Dealer's Cards -->
-            <ItemsControl ItemsSource="{Binding DealerCardImages}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,350,0,0">
+            <ItemsControl ItemsSource="{Binding DealerCardImages}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,190,0,0">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal" />
@@ -49,33 +47,44 @@
             </ItemsControl>
 
             <!-- Buttons -->
-            <Button>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="60">
-                    <TextBlock>"10"</TextBlock>
-                    <Image Source="pack://application:,,,/Pictures/coin1.gif" Width="20" Height="20" Margin="-6"/>
-                </StackPanel>
-            </Button>
-
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="85,0,0,60">
-                    <Button Name="bet_20" Command="{Binding Bet_20}">
-                        <Image Source="pack://application:,,,/Pictures/coin2.gif" Width="20" Height="20" Margin="-6"/>
-                    </Button>
-                </StackPanel>
-
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="110,0,0,60">
-                <Button Name="bet_50" Command="{Binding Bet_50}">
-                    <Image Source="pack://application:,,,/Pictures/coin3.gif" Width="20" Height="20" Margin="-6"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="60,0,0,60">
+                <Button x:Name="bet_10" Command="{Binding Bet_10_Euro}">
+                    <StackPanel>
+                        <Image Source="pack://application:,,,/Pictures/coin1.gif" Width="53" Height="53" Margin="-40"/>
+                        <TextBlock Width="18" Height="18" Margin="-15"><Run Text="10"/></TextBlock>
+                    </StackPanel>
                 </Button>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="135,0,0,60">
-                <Button Name="bet_100" Command="{Binding Bet_100}">
-                    <Image Source="pack://application:,,,/Pictures/coin2.gif" Width="20" Height="20" Margin="-6"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="120,0,0,60">
+                <Button x:Name="bet_20" Command="{Binding Bet_20_Euro}">
+                    <StackPanel>
+                        <Image Source="pack://application:,,,/Pictures/coin2.gif" Width="53" Height="53" Margin="-40"/>
+                        <TextBlock Width="18" Height="18" Margin="-15"><Run Text="20"/></TextBlock>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="180,0,0,60">
+                <Button x:Name="bet_50" Command="{Binding Bet_50_Euro}">
+                    <StackPanel>
+                        <Image Source="pack://application:,,,/Pictures/coin3.gif" Width="53" Height="53" Margin="-40"/>
+                        <TextBlock Width="18" Height="18" Margin="-15"><Run Text="50"/></TextBlock>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="240,0,0,60">
+                <Button x:Name="bet_100" Command="{Binding Bet_100_Euro}">
+                    <StackPanel>
+                        <Image Source="pack://application:,,,/Pictures/coin4.gif" Width="53" Height="53" Margin="-40"/>
+                        <TextBlock Width="27" Height="18" Margin="-15"><Run Text="100"/></TextBlock>
+                    </StackPanel>
                 </Button>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20">
-                <Button Content="BET" Command="{Binding Start_the_game}" Margin="10"/>
+                <Button Content="BET" Command="{Binding BetCommand}" Margin="10"/>
                 <Button Content="HIT" Command="{Binding HitCommand}" Margin="10"/>
                 <Button Content="STAND" Command="{Binding StandCommand}" Margin="10"/>
                 <Button Content="FOLD" Command="{Binding FoldCommand}" Margin="10"/>

@@ -10,7 +10,7 @@ namespace Batman
     {
         List<Card> HiddenCards { get; set; }
         List<Card> RevealedCards { get; set; }
-        void RevealCard();
+        void RevealCard(List<Card> card); // chanching how this is working i jsut put a card
         int GetHandValue();
 
         void WriteHand();
