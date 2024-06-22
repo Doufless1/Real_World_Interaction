@@ -7,7 +7,7 @@
       "RelativeMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|solutionrelative:batman\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|c:\\real_world_interaction\\real_world_interaction\\batman\\batman\\gamelogic\\casino.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|C:\\Real_World_Interaction\\Real_World_Interaction\\Batman\\batman\\gamelogic\\casino.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0F1C53FE-F4DF-4F86-A584-52A8B3C4CB78}|Batman\\Batman.csproj|solutionrelative:batman\\gamelogic\\casino.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -80,8 +80,12 @@
       "DocumentGroups": [
         {
           "DockedWidth": 897,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 7,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
@@ -92,8 +96,7 @@
               "RelativeToolTip": "Batman\\GameLogic\\Casino.cs",
               "ViewState": "AQIAAEEBAAAAAAAAAAAtwFgBAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-22T07:03:38.444Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-22T07:03:38.444Z"
             },
             {
               "$type": "Document",
@@ -105,8 +108,7 @@
               "RelativeToolTip": "Batman\\ViewModels\\BlackJackViewModel.cs",
               "ViewState": "AQIAAJYAAAAAAAAAAAAhwLAAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-18T15:24:23.064Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-18T15:24:23.064Z"
             },
             {
               "$type": "Document",
@@ -118,8 +120,7 @@
               "RelativeToolTip": "Batman\\MainWindow.xaml.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAIAwwBYAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-20T13:13:56.522Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-20T13:13:56.522Z"
             },
             {
               "$type": "Document",
@@ -191,8 +192,7 @@
               "RelativeToolTip": "Batman\\StartWindow.xaml.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-20T13:14:05.243Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-20T13:14:05.243Z"
             },
             {
               "$type": "Document",
@@ -216,8 +216,7 @@
               "RelativeToolTip": "Batman\\Interfaces\\IPlayer.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAATAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-20T10:37:00.089Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-20T10:37:00.089Z"
             },
             {
               "$type": "Document",
