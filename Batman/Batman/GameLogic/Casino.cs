@@ -36,6 +36,12 @@ namespace Batman.Enums
 
         public bool IsHandBlackjack(List<Card> hand)
         {
+
+            if(hand == null)
+            {
+                throw new ArgumentNullException(nameof(hand),"The hand cant be null");
+            }
+
             if (hand.Count == 2)
             {
                 if (hand[0].Face_ == Face.Ace && hand[1].Value_ == 10) return true; // checks if any of the players ahnds is King Queen Jack or Ten with Ace to have a blackjack
@@ -52,32 +58,6 @@ namespace Batman.Enums
                     return true;
                 }
                 return false;
-/*
-                HashSet<Face> Faces = new HashSet<Face> { Face.Ace, Face.King, Face.Queen, Face.Jack };
-                HashSet<int> Values = new HashSet<int> { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
-
-                if (Faces.Contains(hand[0].Face_) && Faces.Contains(hand[1].Face_))
-                {
-                    return true;
-                }
-
-                if (Values.Contains(hand[0].Value_) && Values.Contains(hand[1].Value_))
-                {
-                    return true;
-                }*/
-                /*if (hand[0].Face_ == Face.Ace && hand[1].Face_ == Face.Ace) return true;
-                if (hand[0].Face_ == Face.King && hand[1].Face_ == Face.King) return true;
-                if (hand[0].Face_ == Face.Queen && hand[1].Face_ == Face.Queen) return true;
-                if (hand[0].Face_ == Face.Jack && hand[1].Face_ == Face.Jack) return true;
-                if (hand[0].Value_ == 10 && hand[1].Value_ == 10) return true;
-                if (hand[0].Value_ == 9 && hand[1].Value_ == 9) return true;
-                if (hand[0].Value_ == 8 && hand[1].Value_ == 8) return true;
-                if (hand[0].Value_ == 7 && hand[1].Value_ == 7) return true;
-                if (hand[0].Value_ == 6 && hand[1].Value_ == 6) return true;
-                if (hand[0].Value_ == 5 && hand[1].Value_ == 5) return true;
-                if (hand[0].Value_ == 4 && hand[1].Value_ == 4) return true;
-                if (hand[0].Value_ == 3 && hand[1].Value_ == 3) return true;
-                if (hand[0].Value_ == 2 && hand[1].Value_ == 2) return true;*/
             }
             else if (hand.Count == 1)
             {
@@ -107,11 +87,6 @@ namespace Batman.Enums
 
             AdjustAceValue(dealer_.HiddenCards);
             AdjustAceValue(dealer_.RevealedCards);
-
-            
-    //      dealer_.RevealCard(dealer_.RevealedCards);
-           /* player_.WriteHand();
-            dealer_.WriteHand();*/
         }
 
         public bool TakeBet(string bet_in_string)
@@ -119,16 +94,24 @@ namespace Batman.Enums
     
             // why did u put it with Int32 why not basic int 
             int bet = Int32.Parse(bet_in_string);
+            if(bet < 10)
+            {
+                throw new InvalidOperationException("The value at least shoud be equal or higher then 10");
+            }
             if( player_.Chips_ >= bet)
             {
                 player_.AddBet(bet);
                 return true;
             }
-            return false;
+            throw new InvalidOperationException("You dont have enough chips to play rejuice back at the counter and continue loosing your saving!");
         }
 
         public void TakeActions(string action)
         {
+            if (action.Equals(null))
+            {
+                throw new ArgumentException(nameof(action), "The action taken cant be null or empty");
+            }
              bool hit = false;
             do
             {
@@ -177,7 +160,7 @@ namespace Batman.Enums
                         }
                         break;
                     default:
-                        break;
+                        throw new ArgumentException("$Invalid action{action}", nameof(action));
                 }
 
                 if (player_.GetHandValue() > 21)
@@ -339,12 +322,11 @@ namespace Batman.Enums
             switch (result)
             {
                 case RoundResult.PUSH:
-                    player_.AddChips();
-                  
+                    player_.AddChips();             
                     message = "Player and Dealer Push.";
                     break;
                 case RoundResult.PLAYER_WIN:
-                    message = $"Player Wins {player_.WinBet(false)}chips";
+                    message = $"Player Wins {player_.WinBet(false)} chips";
                    
                     break;
                 case RoundResult.PLAYER_BUST:
@@ -352,7 +334,7 @@ namespace Batman.Enums
                     message = "Player Busts";
                     break;
                 case RoundResult.PLAYER_BLACKJACK:
-                    message = $"Player Wins {player_.WinBet(true)}chips";               
+                    message = $"Player Wins {player_.WinBet(true)} chips";               
                   
                     break;
                 case RoundResult.DEALER_WIN:

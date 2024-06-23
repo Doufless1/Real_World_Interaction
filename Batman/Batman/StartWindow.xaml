@@ -6,8 +6,11 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="StartWindow" Height="Auto" Width="Auto"
-      Background="DarkGreen">
-        
+      Background="DarkGreen"
+         WindowState="Maximized"
+ WindowStyle="None">
+
+
     <Grid>
         <Image Source="pack://application:,,,/Pictures/splashpage.jpg" Stretch="UniformToFill"/>
                <Button Content="New Game" HorizontalAlignment="Center" VerticalAlignment="Center" Click="StartButton_Click" Margin="0,90,0,0"/>

@@ -15,6 +15,7 @@ namespace Batman
     public partial class BlackJackViewModel : ObservableObject
     {
 
+       // private readonly CurrencyService currencyService_;
 
         private bool betplaced_ = false;
 
@@ -49,12 +50,9 @@ namespace Batman
         public string StatusMessage
         {
             get => _statusMessage;
-            set
-            {
-                _statusMessage = value;
-                OnPropertyChanged(nameof(StatusMessage));
-            }
+            set => SetProperty(ref _statusMessage, value);
         }
+        //   OnPropertyChanged(nameof(StatusMessage));
 
         public BlackJackViewModel()
         {
@@ -78,21 +76,6 @@ namespace Batman
 
         }
 
-
-        public void Dealer_Drawing_Till_He_Gets_Bigger_Then_16()
-        {
-
-            /*if (player_.Hand_.Count == 0)
-            {
-                RoundResult.SURRENDER;
-                return;
-            }*/
-               while(dealer_.GetHandValue() < 17)
-            {
-                dealer_.RevealedCards.Add(deck_.DrawCard());
-            }
-        }
-       
         private BitmapImage GetCardImage(Card card)
         {
             string suit = card.Suit_ switch
@@ -167,18 +150,19 @@ namespace Batman
         {
             casino_.TakeActions("HIT");
             UpdateCardDisplayForPlayer();
-            dealer_.RevealCard(dealer_.RevealedCards);
+          //  dealer_.RevealCard(dealer_.RevealedCards);
         }
 
         private void Click_On_Stand()
         {
              On_Stand();
+            UpdateCardDisplayForDealer();
             casino_.TakeActions("STAND");
             casino_.ProcessHand(dealer_.RevealedCards);
             UpdateCardDisplayForPlayer();
-            // Dealer_Drawing_Till_He_Gets_Bigger_Then_16();
-            
+
             UpdateCardDisplayForDealer();
+
             UpdateCardDisplayForPlayer();
         }
 

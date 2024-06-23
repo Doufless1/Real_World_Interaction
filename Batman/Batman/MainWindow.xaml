@@ -7,7 +7,9 @@
         mc:Ignorable="d"
         FontSize="16" Title="MainWindow"
         Height="Auto"
-        Width="Auto">
+        Width="Auto"
+        WindowState="Maximized"
+        WindowStyle="None">
 
     <Grid>
         <!-- Background Image -->
@@ -16,7 +18,40 @@
         <!-- Foreground Content -->
         <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="800" Height="800">
             <!-- Background image for the table -->
-            <Image Source="pack://application:,,,/Pictures/background.jpg" Stretch="UniformToFill" />
+            <Image Source="pack://application:,,,/Pictures/background.jpg" Stretch="UniformToFill" RenderTransformOrigin="0.474,0.782" />
+
+
+            <Image Source="pack://application:,,,/Pictures/redframe.gif" Margin="273,527,295,103" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="89.701"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+
+            <Image Source="pack://application:,,,/Pictures/textfieldtop.gif" Margin="497,626,10,97"/>
+            <TextBlock Text="{Binding StatusMessage}"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Margin="497,636,0,0"
+                   FontSize="24"
+                   Foreground="White"
+                   Background="Black"
+                   Padding="10"
+                   TextAlignment="Center" Width="293" Height="56" FontWeight="Bold"/>
+            <Image Source="pack://application:,,,/Pictures/funi.jpg"  Margin="318,527,344,100" RenderTransformOrigin="0.468,0.523">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+
 
             <!-- Dealer's Cards -->
             <ItemsControl ItemsSource="{Binding DealerCardImages}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,190,0,0">
@@ -33,7 +68,7 @@
             </ItemsControl>
 
             <!-- Player's Cards -->
-            <ItemsControl ItemsSource="{Binding PlayerCardImages}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,100">
+            <ItemsControl ItemsSource="{Binding PlayerCardImages}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,40,320">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal" />
@@ -51,7 +86,7 @@
                 <Button x:Name="bet_10" Command="{Binding Bet_10_Euro}">
                     <StackPanel>
                         <Image Source="pack://application:,,,/Pictures/coin1.gif" Width="53" Height="53" Margin="-40"/>
-                        <TextBlock Width="18" Height="18" Margin="-15"><Run Text="10"/></TextBlock>
+                        <TextBlock TextWrapping="Wrap" Width="22" Height="21" Margin="-15" RenderTransformOrigin="-0.383,10.244"><Run Text="10"/><LineBreak/><Run Text="0"/><LineBreak/><Run/><LineBreak/><Run/></TextBlock>
                     </StackPanel>
                 </Button>
             </StackPanel>
@@ -60,7 +95,7 @@
                 <Button x:Name="bet_20" Command="{Binding Bet_20_Euro}">
                     <StackPanel>
                         <Image Source="pack://application:,,,/Pictures/coin2.gif" Width="53" Height="53" Margin="-40"/>
-                        <TextBlock Width="18" Height="18" Margin="-15"><Run Text="20"/></TextBlock>
+                        <TextBlock TextWrapping="Wrap" Width="22" Height="21" Margin="-15" RenderTransformOrigin="-0.383,10.244"><Run Text="20"/><LineBreak/><Run/><LineBreak/><Run/><LineBreak/><Run/></TextBlock>
                     </StackPanel>
                 </Button>
             </StackPanel>
@@ -69,7 +104,7 @@
                 <Button x:Name="bet_50" Command="{Binding Bet_50_Euro}">
                     <StackPanel>
                         <Image Source="pack://application:,,,/Pictures/coin3.gif" Width="53" Height="53" Margin="-40"/>
-                        <TextBlock Width="18" Height="18" Margin="-15"><Run Text="50"/></TextBlock>
+                        <TextBlock TextWrapping="Wrap" Width="22" Height="21" Margin="-15" RenderTransformOrigin="-0.383,10.244"><Run Text="50"/><LineBreak/><Run/><LineBreak/><Run/></TextBlock>
                     </StackPanel>
                 </Button>
             </StackPanel>
@@ -78,7 +113,7 @@
                 <Button x:Name="bet_100" Command="{Binding Bet_100_Euro}">
                     <StackPanel>
                         <Image Source="pack://application:,,,/Pictures/coin4.gif" Width="53" Height="53" Margin="-40"/>
-                        <TextBlock Width="27" Height="18" Margin="-15"><Run Text="100"/></TextBlock>
+                        <TextBlock TextWrapping="Wrap" Width="27" Height="21" Margin="-15" RenderTransformOrigin="-0.383,10.244"><Run Text="100"/><LineBreak/><Run/><LineBreak/><Run/></TextBlock>
                     </StackPanel>
                 </Button>
             </StackPanel>
@@ -89,6 +124,7 @@
                 <Button Content="STAND" Command="{Binding StandCommand}" Margin="10"/>
                 <Button Content="FOLD" Command="{Binding FoldCommand}" Margin="10"/>
             </StackPanel>
+            <TextBlock TextWrapping="Wrap" Foreground="Red" Text="Player 1" Margin="387,711,324,68" FontFamily="Cyan" FontWeight="Bold" FontSize="22"/>
         </Grid>
     </Grid>
 </Window>

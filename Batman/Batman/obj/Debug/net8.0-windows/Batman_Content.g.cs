@@ -10,6 +10,7 @@
 
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("bin/debug/net8.0-windows/pictures/cardskin.png")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("pictures/cardskin.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("pictures/funi.jpg")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("pictures/splashpage.jpg")]
 
 
