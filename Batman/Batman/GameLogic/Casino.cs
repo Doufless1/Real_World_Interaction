@@ -36,36 +36,51 @@ namespace Batman.Enums
 
         public bool IsHandBlackjack(List<Card> hand)
         {
-
-            if(hand == null)
+            try
             {
-                throw new ArgumentNullException(nameof(hand),"The hand cant be null");
+
+                if (hand == null)
+                {
+                    throw new ArgumentNullException(nameof(hand), "The hand cant be null");
+                }
+
+                if (hand.Count == 2)
+                {
+                    if (hand[0].Face_ == Face.Ace && hand[1].Value_ == 10) return true; // checks if any of the players ahnds is King Queen Jack or Ten with Ace to have a blackjack
+                    else if (hand[1].Face_ == Face.Ace && hand[0].Value_ == 10) return true;
+                }
             }
-
-            if (hand.Count == 2)
+            catch (Exception ex) 
             {
-                if (hand[0].Face_ == Face.Ace && hand[1].Value_ == 10) return true; // checks if any of the players ahnds is King Queen Jack or Ten with Ace to have a blackjack
-                else if (hand[1].Face_ == Face.Ace && hand[0].Value_ == 10) return true;
+                OnRoundEnded($"{ex.Message}");
+               
             }
             return false;
         }
         public bool Is_Hand_for_Splitting(List<Card> hand)
         {
-            if (hand.Count == 2)
+            try
             {
-                if((hand[0].Face_ == hand[1].Face_) || (hand[0].Value_ == hand[1].Value_))
+                if (hand.Count == 2)
                 {
-                    return true;
+                    if ((hand[0].Face_ == hand[1].Face_) || (hand[0].Value_ == hand[1].Value_))
+                    {
+                        return true;
+                    }
+                    return false;
                 }
-                return false;
+                else if (hand.Count == 1)
+                {
+                    throw new InvalidProgramException("Something Went wrong in the code!!!");
+                }
             }
-            else if (hand.Count == 1)
-            {
-                throw new InvalidProgramException("Something Went wrong in the code!!!");
+            catch (Exception ex) {
+                OnRoundEnded($"{ex.Message}");
+               
             }
-
             return false;
         }
+        
        private void AdjustAceValue(List<Card> hand)
         {
             if (hand.Count == 2 && hand.All(card => card.Face_ == Face.Ace))
@@ -74,108 +89,130 @@ namespace Batman.Enums
             }
         }
 
-       
+
         public void InitializeHand(string starting_the_round)
         {
             //TODO: I feel like you are doing it wrong the thing is that in poker only one of the dealers hands is down
+            try
+            {
 
-            deck_.Initialize();
 
-            player_.Hand_ = deck_.DealHand();
-            dealer_.HiddenCards = new List<Card> {deck_.DrawCard()};
-            dealer_.RevealedCards = new List<Card> { deck_.DrawCard()};
+                deck_.Initialize();
 
-            AdjustAceValue(dealer_.HiddenCards);
-            AdjustAceValue(dealer_.RevealedCards);
-        }
+                player_.Hand_ = deck_.DealHand();
+                dealer_.HiddenCards = new List<Card> { deck_.DrawCard() };
+                dealer_.RevealedCards = new List<Card> { deck_.DrawCard() };
+
+                AdjustAceValue(dealer_.HiddenCards);
+                AdjustAceValue(dealer_.RevealedCards);
+            }
+            catch(Exception ex) { 
+            OnRoundEnded($"{ex.Message}");
+            }
+            }
 
         public bool TakeBet(string bet_in_string)
         {
-    
-            // why did u put it with Int32 why not basic int 
-            int bet = Int32.Parse(bet_in_string);
-            if(bet < 10)
+
+
+            try
             {
-                throw new InvalidOperationException("The value at least shoud be equal or higher then 10");
+                // why did u put it with Int32 why not basic int 
+                int bet = Int32.Parse(bet_in_string);
+                if (bet < 10)
+                {
+                    throw new InvalidOperationException("The value at least shoud be equal or higher then 10");
+                }
+                if (player_.Chips_ >= bet)
+                {
+                    player_.AddBet(bet);
+                    return true;
+                }
+                throw new InvalidOperationException("You dont have enough chips to play rejuice back at the counter and continue loosing your saving!");
             }
-            if( player_.Chips_ >= bet)
+            catch(Exception ex)
             {
-                player_.AddBet(bet);
-                return true;
+                OnRoundEnded($"{ex.Message}");
+                return false;
             }
-            throw new InvalidOperationException("You dont have enough chips to play rejuice back at the counter and continue loosing your saving!");
         }
 
         public void TakeActions(string action)
         {
-            if (action.Equals(null))
+            try
             {
-                throw new ArgumentException(nameof(action), "The action taken cant be null or empty");
-            }
-             bool hit = false;
-            do
-            {
-                switch (action.ToUpper())
+                if (action.Equals(null))
                 {
-                    case "HIT":
-                        player_.Hand_.Add(deck_.DrawCard());
-                        hit = true;
-                         break;
-                    case "STAND":
-                        break;
-                    case "FOLD": // its not surrender its fold
-                        player_.Hand_.Clear();
-                        dealer_.RevealedCards.Clear();
-                        break;
-                    case "DOUBLE":
-                        // Fixed: In blackjack when u double u cant double if have less then the needed chips 
-                        if (player_.Chips_ >= player_.Bet_) // i think this is wrong
-                        {
-                            player_.AddBet(player_.Bet_);
-                        }
-                        else
-                        {
-                            throw new InvalidOperationException("You cant DOUBLE dont have Enought Chips to do that!!!");
-                        }
-                        player_.Hand_.Add(deck_.DrawCard());
-                        break;
-                    case "SPLIT":
-                        if (Is_Hand_for_Splitting(player_.Hand_) && player_.Chips_ >= player_.Bet_)
-                        {
-                            player_.AddBet(player_.Chips_);
-                            List<Card> splitHand1 = new List<Card>() { player_.Hand_[0], deck_.DrawCard() };
-                            List<Card> splitHand2 = new List<Card>() { player_.Hand_[1], deck_.DrawCard() };
-
-                     //       Take_Action_After_Spitting_The_Hand(splitHand1);
-                       //     Take_Action_After_Spitting_The_Hand(splitHand2);
-
-
-                            player_.SplitHands_ = new List<List<Card>> { splitHand1, splitHand2 };
-
-                        }
-                        else
-                        {
-                            throw new InvalidOperationException("You are not able to SPLIT u need your balance to be equal to your Bet to do that");
-
-                        }
-                        break;
-                    default:
-                        throw new ArgumentException("$Invalid action{action}", nameof(action));
+                    throw new ArgumentException(nameof(action), "The action taken cant be null or empty");
                 }
-
-                if (player_.GetHandValue() > 21)
+                bool hit = false;
+                do
                 {
-                    foreach (Card card in player_.Hand_)
+                    switch (action.ToUpper())
                     {
-                        if (card.Value_ == 11) // Only a soft ace can have a value of 11
-                        {
-                            card.Value_ = 1;
+                        case "HIT":
+                            player_.Hand_.Add(deck_.DrawCard());
+                            hit = true;
                             break;
+                        case "STAND":
+                            break;
+                        case "FOLD": // its not surrender its fold
+                            player_.Hand_.Clear();
+                            player_.ClearBet();
+                            dealer_.RevealedCards.Clear();
+                            break;
+                        case "DOUBLE":
+                            // Fixed: In blackjack when u double u cant double if have less then the needed chips 
+                            if (player_.Chips_ >= player_.Bet_) // i think this is wrong
+                            {
+                                player_.AddBet(player_.Bet_);
+                            }
+                            else
+                            {
+                                throw new InvalidOperationException("You cant DOUBLE dont have Enought Chips to do that!!!");
+                            }
+                            player_.Hand_.Add(deck_.DrawCard());
+                            break;
+                        case "SPLIT":
+                            if (Is_Hand_for_Splitting(player_.Hand_) && player_.Chips_ >= player_.Bet_)
+                            {
+                                player_.AddBet(player_.Chips_);
+                                List<Card> splitHand1 = new List<Card>() { player_.Hand_[0], deck_.DrawCard() };
+                                List<Card> splitHand2 = new List<Card>() { player_.Hand_[1], deck_.DrawCard() };
+
+                                //       Take_Action_After_Spitting_The_Hand(splitHand1);
+                                //     Take_Action_After_Spitting_The_Hand(splitHand2);
+
+
+                                player_.SplitHands_ = new List<List<Card>> { splitHand1, splitHand2 };
+
+                            }
+                            else
+                            {
+                                throw new InvalidOperationException("You are not able to SPLIT u need your balance to be equal to your Bet to do that");
+
+                            }
+                            break;
+                        default:
+                            throw new ArgumentException("$Invalid action{action}", nameof(action));
+                    }
+
+                    if (player_.GetHandValue() > 21)
+                    {
+                        foreach (Card card in player_.Hand_)
+                        {
+                            if (card.Value_ == 11) // Only a soft ace can have a value of 11
+                            {
+                                card.Value_ = 1;
+                                break;
+                            }
                         }
                     }
-                }
-            } while (!action.ToUpper().Equals("STAND") && !action.ToUpper().Equals("DOUBLE")
-                && !action.ToUpper().Equals("FOLD") && player_.GetHandValue() <= 21 && hit != true);
+                } while (!action.ToUpper().Equals("STAND") && !action.ToUpper().Equals("DOUBLE")
+                    && !action.ToUpper().Equals("FOLD") && player_.GetHandValue() <= 21 && hit != true);
+            }catch (Exception ex) {
+                OnRoundEnded($"{ex.Message}");
+            }
         }
 
 
@@ -260,9 +297,24 @@ namespace Batman.Enums
         private int GetHandValue(List<Card> hand)
         {
             int value = 0;
+            int Ace_counter = 0;
             foreach (Card card in hand)
             {
-                value += card.Value_;
+                if (card.Face_ == Enums.Face.Ace)
+                {
+                    value += 11;
+                    Ace_counter++;
+                }
+                else
+                {
+                    value += card.Value_;
+                }
+            }
+            while (value > 21 && Ace_counter > 0)
+            {
+                value -= 10;
+                Ace_counter--;
+
             }
             return value;
         }
@@ -283,9 +335,6 @@ namespace Batman.Enums
             {
                 dealer_.RevealedCards.Add(deck_.DrawCard());
 
-/*
-                player_.WriteHand();
-                dealer_.WriteHand();*/
             }
 
             if (GetHandValue(hand) > dealer_.GetHandValue())
@@ -331,16 +380,17 @@ namespace Batman.Enums
                     break;
                 case RoundResult.PLAYER_BUST:
 
-                    message = "Player Busts";
+                    message = $"Player Busts Loses {player_.Bet_} chips";
                     break;
                 case RoundResult.PLAYER_BLACKJACK:
                     message = $"Player Wins {player_.WinBet(true)} chips";               
                   
                     break;
                 case RoundResult.DEALER_WIN:
-                    player_.ClearBet();
+                
                    
-                    message = "Dealer Wins.";
+                    message = $"Dealer Wins! {player_.Bet_} chips lost";
+                    player_.ClearBet();
                     break;
                 case RoundResult.SURRENDER:
                     message = $"Player Surrenders {player_.Bet_ / 2} chips";

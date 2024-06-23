@@ -15,17 +15,28 @@ namespace Batman
     public partial class BlackJackViewModel : ObservableObject
     {
 
-       // private readonly CurrencyService currencyService_;
+        // private readonly CurrencyService currencyService_;
 
         private bool betplaced_ = false;
+        private bool check_if_hit_was_pressed = false;
+        private bool check_if_double_was_pressed = false;
 
+        private int dealers_hand_value;
+
+        private int player_hand_value;
+
+        private int player_add_bet;
+
+        private string _statusMessage;
+
+        public IRelayCommand? DoubleCommand { get; private set; }
         public IRelayCommand? HitCommand { get; private set; }
         public IRelayCommand? StandCommand { get; private set; }
 
         public IRelayCommand? FoldCommand { get; private set; }
 
-        public IRelayCommand? Start_the_game { get; private set; }   
-        
+        public IRelayCommand? Start_the_game { get; private set; }
+
         public IRelayCommand? Bet_10_Euro { get; private set; }
         public IRelayCommand? Bet_20_Euro { get; private set; }
 
@@ -44,16 +55,30 @@ namespace Batman
         public ObservableCollection<BitmapImage> PlayerCardImages { get; set; }
         public ObservableCollection<BitmapImage> DealerCardImages { get; set; }
 
-        //     public ObservableCollection<ImageSource> CardImages2 { get; set; }
-        private string _statusMessage;
-
+        
+        public int Player_Add_Bet
+        {
+            get => player_add_bet;
+            set => SetProperty(ref player_add_bet, value);
+        }
         public string StatusMessage
         {
             get => _statusMessage;
             set => SetProperty(ref _statusMessage, value);
         }
+
+        public int DealersHandValue
+        {
+            get => dealers_hand_value;
+            set => SetProperty(ref dealers_hand_value, value);
+        }
         //   OnPropertyChanged(nameof(StatusMessage));
 
+
+        public int PlayerHandValue{
+            get => player_hand_value;
+            set => SetProperty(ref player_hand_value, value);
+            }
         public BlackJackViewModel()
         {
             deck_ = new Deck();
@@ -119,6 +144,7 @@ namespace Batman
             {
                 PlayerCardImages.Add(GetCardImage(card));
             }
+            PlayerHandValue = player_.GetHandValue();
         }
         private void UpdateCardDisplayForDealer()
         {
@@ -129,13 +155,16 @@ namespace Batman
                 if (dealer_.RevealedCards.Count() == 1)
                 {
                     DealerCardImages.Add(GetCardImage(card));
+                   
                     InitializeSkins();
                 } else{
                     DealerCardImages.Add(GetCardImage(card));
+                   
                 }
-                    
             }
+            DealersHandValue = dealer_.GetHandValue();
         }
+
   
         private void On_Stand()
         {
@@ -146,33 +175,128 @@ namespace Batman
         => casino_.Is_Hand_for_Splitting(player_.Hand_);
 
 
+        private void ResetFlags()
+        {
+            check_if_hit_was_pressed = false;
+            check_if_double_was_pressed = false;
+            betplaced_ = false;
+        }
+
+        void Check_If_Player_Bust_When_He_Gets_Card()
+        {
+            if (player_.GetHandValue() > 21)
+            {
+                casino_.EndRound(RoundResult.PLAYER_BUST);
+            }
+        }
+        private void Click_On_Double()
+        {
+            try
+            {
+                if (check_if_double_was_pressed)
+                {
+                    throw new InvalidOperationException("You can't use Double Twice!");
+                }
+                if (!betplaced_)
+                {
+                    throw new InvalidOperationException("Place a bet first!");
+                }
+                if (check_if_hit_was_pressed)
+                {
+                    throw new InvalidOperationException("You can't Double when you Hitted!");
+                }
+                if (player_.GetHandValue() >= 21)
+                {
+                    throw new InvalidOperationException("You are exceding Limits");
+                }        
+                    casino_.TakeActions("DOUBLE");
+                    Check_If_Player_Bust_When_He_Gets_Card();
+                    UpdateCardDisplayForPlayer();
+                    check_if_double_was_pressed = true;
+                
+            } catch (Exception ex)
+            {
+                StatusMessage = $"{ex.Message}";
+            }
+        }
+
         private void Click_On_Hit()
         {
-            casino_.TakeActions("HIT");
-            UpdateCardDisplayForPlayer();
-          //  dealer_.RevealCard(dealer_.RevealedCards);
+            try
+            {
+                if (check_if_double_was_pressed)
+                {
+                    throw new InvalidOperationException("You can't Hit after Double!");
+                }
+                if (player_.GetHandValue() < 21 )
+                {
+                    casino_.TakeActions("HIT");
+                    Check_If_Player_Bust_When_He_Gets_Card();
+                    UpdateCardDisplayForPlayer();
+                    check_if_hit_was_pressed = true;
+                } else
+                {
+                    throw new InvalidOperationException("You already BUSTED!");
+                }
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = $"{ex.Message}";
+            }
         }
 
         private void Click_On_Stand()
         {
-             On_Stand();
-            UpdateCardDisplayForDealer();
-            casino_.TakeActions("STAND");
-            casino_.ProcessHand(dealer_.RevealedCards);
-            UpdateCardDisplayForPlayer();
+            try
+            {
+                On_Stand();
 
-            UpdateCardDisplayForDealer();
+                UpdateCardDisplayForDealer();
+                casino_.TakeActions("STAND");
 
-            UpdateCardDisplayForPlayer();
+                casino_.ProcessHand(player_.Hand_);
+                UpdateCardDisplayForPlayer();
+
+                UpdateCardDisplayForDealer();
+
+                UpdateCardDisplayForPlayer();
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = $"{ex.Message}";
+            }
         }
 
         private void Click_On_Fold()
         { 
             casino_.TakeActions("FOLD");
-          //  casino_.ProcessHand(player_.Hand_);
+
             UpdateCardDisplayForPlayer();
             UpdateCardDisplayForDealer();
             dealer_.RevealedCards.Clear();
+            Player_Add_Bet = 0;
+        ResetFlags();
+        }
+
+        private void Start_the_Round_After_betting()
+        {
+            try
+            {
+                if (betplaced_)
+                {
+                    casino_.InitializeHand("BET");
+                    UpdateCardDisplayForDealer();
+                    UpdateCardDisplayForPlayer();
+                }
+                else
+                {
+                    throw new InvalidOperationException("Please put a bet First!");
+                }
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = $"{ex.Message}";
+            }
         }
         private void InitializeCommands()
         {
@@ -180,6 +304,7 @@ namespace Batman
             StandCommand = new RelayCommand(Click_On_Stand);
             FoldCommand = new RelayCommand(Click_On_Fold);
             BetCommand = new RelayCommand(Start_the_Round_After_betting);
+            DoubleCommand = new RelayCommand(Click_On_Double);
             Bet_10_Euro = new RelayCommand(Bet_10);
             Bet_50_Euro = new RelayCommand(Bet_50);
             Bet_20_Euro = new RelayCommand(Bet_20);
@@ -190,39 +315,31 @@ namespace Batman
         private void Bet_10()
         {
             casino_.TakeBet("10");
+            Player_Add_Bet += 10;
             betplaced_ = true;
         }
 
         private void Bet_20()
         {
             casino_.TakeBet("20");
+            Player_Add_Bet += 20;
             betplaced_ = true;
         }
 
         private void Bet_50()
         {
             casino_.TakeBet("50");
+            Player_Add_Bet += 50;
             betplaced_ = true;
         }
 
         private void Bet_100()
         {
             casino_.TakeBet("100");
+            Player_Add_Bet += 100;
             betplaced_ = true;
         }
-        private void Start_the_Round_After_betting()
-        {
-            if (betplaced_)
-            {
-                casino_.InitializeHand("BET");
-                betplaced_ = false;
-                UpdateCardDisplayForDealer();
-                UpdateCardDisplayForPlayer();
-            } else
-            {
-                throw new InvalidOperationException("Please put a bet First!");
-            }
-        }
+     
         private void InitializeSkins()
         {
       

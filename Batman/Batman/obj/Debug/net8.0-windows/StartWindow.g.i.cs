@@ -52,7 +52,7 @@ namespace Batman {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Batman;V1.0.0.0;component/startwindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Batman;component/startwindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\StartWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
