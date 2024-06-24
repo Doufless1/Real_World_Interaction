@@ -51,13 +51,22 @@ namespace Batman
 
         public void Initialize()
         {
-            Deck_ = Unshuffled();
-            Shuffle();
+            var connect = new Models.tcpClient();
+            connect.StartClient("NEW");
+            //Deck_ = Unshuffled();
+            //Shuffle();
         }
 
         public List<Card> DealHand()
         {
+
             if (Deck_.Count < Constants.VALUE_OF_2)
+
+            var connect=new Models.tcpClient();
+            return connect.StartClient("Deal");
+            /*
+            if (Deck_.Count < 2)
+
             {
                 throw new InvalidOperationException("Not enough cards to play the game");
             }
@@ -67,12 +76,20 @@ namespace Batman
 
             Deck_.RemoveRange(Constants.VALUE_OF_O, Constants.VALUE_OF_2);
 
-            return hand;
+            return hand;*/
         }
 
         public Card DrawCard()
         {
+
             if (Deck_.Count == Constants.VALUE_OF_O)
+
+            var connect = new Models.tcpClient();
+            var hit = connect.StartClient("hit");
+            return hit[0];
+            /*
+            if (Deck_.Count == 0)
+ refs/remotes/destination/main
             {
                 throw new InvalidOperationException("There is no more cards to draw!");
             }
@@ -81,6 +98,7 @@ namespace Batman
             Deck_.Remove(card);
 
             return card;
+            */
         }
 
     }
