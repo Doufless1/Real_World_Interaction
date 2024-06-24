@@ -13,7 +13,7 @@ namespace Batman.Enums
 {
     public class Casino
     {
-        private int MinimumBet { get; } = 10;
+     //   private int MinimumBet { get; } = 10;
         private IDeck deck_;// = new Deck();
         private IPlayer player_;// = new Player();
         private IDealer dealer_;
@@ -44,10 +44,10 @@ namespace Batman.Enums
                     throw new ArgumentNullException(nameof(hand), "The hand cant be null");
                 }
 
-                if (hand.Count == 2)
+                if (hand.Count == Constants.VALUE_OF_2)
                 {
-                    if (hand[0].Face_ == Face.Ace && hand[1].Value_ == 10) return true; // checks if any of the players ahnds is King Queen Jack or Ten with Ace to have a blackjack
-                    else if (hand[1].Face_ == Face.Ace && hand[0].Value_ == 10) return true;
+                    if (hand[Constants.VALUE_OF_O].Face_ == Face.Ace && hand[Constants.VALUE_OF_1].Value_ == Constants.VALUE_OF_10) return true; // checks if any of the players ahnds is King Queen Jack or Ten with Ace to have a blackjack
+                    else if (hand[Constants.VALUE_OF_1].Face_ == Face.Ace && hand[Constants.VALUE_OF_O].Value_ == Constants.VALUE_OF_1) return true;
                 }
             }
             catch (Exception ex) 
@@ -61,15 +61,15 @@ namespace Batman.Enums
         {
             try
             {
-                if (hand.Count == 2)
+                if (hand.Count == Constants.VALUE_OF_2)
                 {
-                    if ((hand[0].Face_ == hand[1].Face_) || (hand[0].Value_ == hand[1].Value_))
+                    if ((hand[Constants.VALUE_OF_O].Face_ == hand[Constants.VALUE_OF_1].Face_) || (hand[Constants.VALUE_OF_O].Value_ == hand[Constants.VALUE_OF_1].Value_))
                     {
                         return true;
                     }
                     return false;
                 }
-                else if (hand.Count == 1)
+                else if (hand.Count == Constants.VALUE_OF_1)
                 {
                     throw new InvalidProgramException("Something Went wrong in the code!!!");
                 }
@@ -83,9 +83,9 @@ namespace Batman.Enums
         
        private void AdjustAceValue(List<Card> hand)
         {
-            if (hand.Count == 2 && hand.All(card => card.Face_ == Face.Ace))
+            if (hand.Count == Constants.VALUE_OF_2 && hand.All(card => card.Face_ == Face.Ace))
             {
-                hand[1].Value_ = 1;
+                hand[Constants.VALUE_OF_1].Value_ = Constants.VALUE_OF_1;
             }
         }
 
@@ -119,7 +119,7 @@ namespace Batman.Enums
             {
                 // why did u put it with Int32 why not basic int 
                 int bet = Int32.Parse(bet_in_string);
-                if (bet < 10)
+                if (bet < Constants.VALUE_OF_10)
                 {
                     throw new InvalidOperationException("The value at least shoud be equal or higher then 10");
                 }
@@ -128,7 +128,7 @@ namespace Batman.Enums
                     player_.AddBet(bet);
                     return true;
                 }
-                throw new InvalidOperationException("You dont have enough chips to play rejuice back at the counter and continue loosing your saving!");
+                throw new InvalidOperationException("Exceeding balance");
             }
             catch(Exception ex)
             {
@@ -166,19 +166,21 @@ namespace Batman.Enums
                             if (player_.Chips_ >= player_.Bet_) // i think this is wrong
                             {
                                 player_.AddBet(player_.Bet_);
+                                player_.Hand_.Add(deck_.DrawCard());
                             }
                             else
                             {
+                             
                                 throw new InvalidOperationException("You cant DOUBLE dont have Enought Chips to do that!!!");
                             }
-                            player_.Hand_.Add(deck_.DrawCard());
+                          
                             break;
                         case "SPLIT":
                             if (Is_Hand_for_Splitting(player_.Hand_) && player_.Chips_ >= player_.Bet_)
                             {
                                 player_.AddBet(player_.Chips_);
-                                List<Card> splitHand1 = new List<Card>() { player_.Hand_[0], deck_.DrawCard() };
-                                List<Card> splitHand2 = new List<Card>() { player_.Hand_[1], deck_.DrawCard() };
+                                List<Card> splitHand1 = new List<Card>() { player_.Hand_[Constants.VALUE_OF_O], deck_.DrawCard() };
+                                List<Card> splitHand2 = new List<Card>() { player_.Hand_[Constants.VALUE_OF_1], deck_.DrawCard() };
 
                                 //       Take_Action_After_Spitting_The_Hand(splitHand1);
                                 //     Take_Action_After_Spitting_The_Hand(splitHand2);
@@ -197,21 +199,22 @@ namespace Batman.Enums
                             throw new ArgumentException("$Invalid action{action}", nameof(action));
                     }
 
-                    if (player_.GetHandValue() > 21)
+                    if (player_.GetHandValue() > Constants.VALUE_OF_21)
                     {
                         foreach (Card card in player_.Hand_)
                         {
-                            if (card.Value_ == 11) // Only a soft ace can have a value of 11
+                            if (card.Value_ == Constants.VALUE_OF_11) // Only a soft ace can have a value of 11
                             {
-                                card.Value_ = 1;
+                                card.Value_ = Constants.VALUE_OF_1;
                                 break;
                             }
                         }
                     }
                 } while (!action.ToUpper().Equals("STAND") && !action.ToUpper().Equals("DOUBLE")
-                    && !action.ToUpper().Equals("FOLD") && player_.GetHandValue() <= 21 && hit != true);
+                    && !action.ToUpper().Equals("FOLD") && player_.GetHandValue() <= Constants.VALUE_OF_21 && hit != true);
             }catch (Exception ex) {
                 OnRoundEnded($"{ex.Message}");
+                throw;
             }
         }
 
@@ -284,7 +287,7 @@ namespace Batman.Enums
 
 
             List<List<Card>> handsToPlay = new List<List<Card>> { player_.Hand_ };
-            if (player_.SplitHands_ != null && player_.SplitHands_.Count > 0)
+            if (player_.SplitHands_ != null && player_.SplitHands_.Count > Constants.VALUE_OF_O)
             {
                 handsToPlay.AddRange(player_.SplitHands_); // we ensure that each item inside the SplitHands is added to handstoplay as individual items
             }
@@ -296,13 +299,13 @@ namespace Batman.Enums
         }
         private int GetHandValue(List<Card> hand)
         {
-            int value = 0;
-            int Ace_counter = 0;
+            int value = Constants.VALUE_OF_O;
+            int Ace_counter = Constants.VALUE_OF_O;
             foreach (Card card in hand)
             {
                 if (card.Face_ == Enums.Face.Ace)
                 {
-                    value += 11;
+                    value += Constants.VALUE_OF_11;
                     Ace_counter++;
                 }
                 else
@@ -310,9 +313,9 @@ namespace Batman.Enums
                     value += card.Value_;
                 }
             }
-            while (value > 21 && Ace_counter > 0)
+            while (value > Constants.VALUE_OF_21 && Ace_counter > Constants.VALUE_OF_O)
             {
-                value -= 10;
+                value -= Constants.VALUE_OF_10;
                 Ace_counter--;
 
             }
@@ -320,36 +323,43 @@ namespace Batman.Enums
         }
         public void ProcessHand(List<Card> hand)
         {
-            if (hand.Count == 0)
+            if (hand.Count == Constants.VALUE_OF_O)
             {
                 EndRound(RoundResult.SURRENDER);
                 return;
             }
-            else if (GetHandValue(hand) > 21)
+            else if (GetHandValue(hand) > Constants.VALUE_OF_21)
             {
                 EndRound(RoundResult.PLAYER_BUST);
                 return;
             }
 
-            while (dealer_.GetHandValue() <= 16)
+            while (dealer_.GetHandValue() <= Constants.VALUE_OF_16)
             {
                 dealer_.RevealedCards.Add(deck_.DrawCard());
 
             }
 
+            if (IsHandBlackjack(hand) && !IsHandBlackjack(dealer_.RevealedCards))
+            {
+                player_.Wins_++;
+                EndRound(RoundResult.PLAYER_BLACKJACK);
+                return;
+            }
+
+            if (IsHandBlackjack(dealer_.RevealedCards))
+            {
+                EndRound(RoundResult.DEALER_WIN);
+                return;
+            }
+
             if (GetHandValue(hand) > dealer_.GetHandValue())
             {
                 player_.Wins_++;
-                if (IsHandBlackjack(hand))
-                {
-                    EndRound(RoundResult.PLAYER_BLACKJACK);
-                }
-                else
-                {
                     EndRound(RoundResult.PLAYER_WIN);
-                }
+                
             }
-            else if (dealer_.GetHandValue() > 21)
+            else if (dealer_.GetHandValue() > Constants.VALUE_OF_21)
             {
                 player_.Wins_++;
                 EndRound(RoundResult.PLAYER_WIN);
@@ -384,17 +394,15 @@ namespace Batman.Enums
                     break;
                 case RoundResult.PLAYER_BLACKJACK:
                     message = $"Player Wins {player_.WinBet(true)} chips";               
-                  
                     break;
                 case RoundResult.DEALER_WIN:
-                
-                   
+
                     message = $"Dealer Wins! {player_.Bet_} chips lost";
                     player_.ClearBet();
                     break;
                 case RoundResult.SURRENDER:
-                    message = $"Player Surrenders {player_.Bet_ / 2} chips";
-                    player_.Chips_ += player_.Bet_ / 2;
+                    message = $"Player Surrenders {player_.Bet_ / Constants.VALUE_OF_2} chips";
+                    player_.Chips_ += player_.Bet_ / Constants.VALUE_OF_2;
                     player_.ClearBet();
                     break;
                 case RoundResult.INVALID_BET:
@@ -402,9 +410,9 @@ namespace Batman.Enums
                     break;
             }
 
-            if (player_.Chips_ <= 0)
+            if (player_.Chips_ <= Constants.VALUE_OF_O)
             {
-                message = "Player is going broke";
+                message = $"Player is broke {player_.Chips_} chips left";
                 player_ = new Player();
             }
             OnRoundEnded(message);

@@ -13,7 +13,5 @@ namespace Batman
         void RevealCard(List<Card> card); // chanching how this is working i jsut put a card
         int GetHandValue();
 
-        void WriteHand();
-
     }
 }

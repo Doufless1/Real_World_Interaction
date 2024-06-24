@@ -14,22 +14,22 @@ namespace Batman
 
         public void RevealCard(List<Card> card)
         {
-            if (HiddenCards.Count != 0)
+            if (HiddenCards.Count != Constants.VALUE_OF_O)
             {
-                RevealedCards.Add(HiddenCards[0]);
-                HiddenCards.RemoveAt(0);
+                RevealedCards.Add(HiddenCards[Constants.VALUE_OF_O]);
+                HiddenCards.RemoveAt(Constants.VALUE_OF_O);
             }
         }
 
         public int GetHandValue()
         {
-            int value = 0;
-            int Ace_counter = 0;
+            int value = Constants.VALUE_OF_O;
+            int Ace_counter = Constants.VALUE_OF_O;
             foreach (Card card in RevealedCards)
             {
                 if (card.Face_ == Enums.Face.Ace)
                 {
-                    value += 11;
+                    value += Constants.VALUE_OF_11;
                     Ace_counter++;
                 }
                 else
@@ -37,24 +37,13 @@ namespace Batman
                     value += card.Value_;
                 }
             }
-            while (value > 21 && Ace_counter > 0)
+            while (value > Constants.VALUE_OF_21 && Ace_counter > Constants.VALUE_OF_O)
             {
-                value -= 10;
+                value -= Constants.VALUE_OF_10;
                 Ace_counter--;
 
             }
             return value;
         }
-
-            public void WriteHand()
-        {
-            Console.WriteLine($"Dealer's Hand ( {GetHandValue()} ):");
-            foreach (Card card in RevealedCards)
-            {
-             //   card.Description();
-            }
-        }
-
-
     }
 }

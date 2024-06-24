@@ -16,7 +16,7 @@ namespace Batman
         public List<Card> Unshuffled()
         {
             List<Card> deck = new List<Card>();
-            for (int k = 0; k < 2; k++)
+            for (int k = Constants.VALUE_OF_O; k < Constants.VALUE_OF_2; k++)
             {
 
                 foreach (Suit suit in Enum.GetValues(typeof(Suit)))
@@ -37,10 +37,10 @@ namespace Batman
             Random rng = new Random();
 
             int n = Deck_.Count;
-            while (n > 1)
+            while (n > Constants.VALUE_OF_1)
             {
                 n--;
-                int k = rng.Next(n + 1);
+                int k = rng.Next(n + Constants.VALUE_OF_1);
                 Card card = Deck_[k];
                 Deck_[k] = Deck_[n];
                 Deck_[n] = card;
@@ -57,26 +57,26 @@ namespace Batman
 
         public List<Card> DealHand()
         {
-            if (Deck_.Count < 2)
+            if (Deck_.Count < Constants.VALUE_OF_2)
             {
                 throw new InvalidOperationException("Not enough cards to play the game");
             }
             List<Card> hand = new List<Card>();
-            hand.Add(Deck_[0]);
-            hand.Add(Deck_[1]);
+            hand.Add(Deck_[Constants.VALUE_OF_O]);
+            hand.Add(Deck_[Constants.VALUE_OF_1]);
 
-            Deck_.RemoveRange(0, 2);
+            Deck_.RemoveRange(Constants.VALUE_OF_O, Constants.VALUE_OF_2);
 
             return hand;
         }
 
         public Card DrawCard()
         {
-            if (Deck_.Count == 0)
+            if (Deck_.Count == Constants.VALUE_OF_O)
             {
                 throw new InvalidOperationException("There is no more cards to draw!");
             }
-            Card card = Deck_[0];
+            Card card = Deck_[Constants.VALUE_OF_O];
 
             Deck_.Remove(card);
 

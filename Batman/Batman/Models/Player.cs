@@ -12,7 +12,7 @@ namespace Batman
         public int Chips_ { get; set; } = 500;
         public int Bet_ { get; set; }
         public int Wins_ { get; set; }
-        public int HandsCompleted_ { get; set; } = 1;
+        public int HandsCompleted_ { get; set; } = Constants.VALUE_OF_1;
 
         public List<Card> Hand_ { get; set; }
 
@@ -29,7 +29,7 @@ namespace Batman
         public void AddBet(int bet)
         {
             Bet_ += bet;
-            if (Chips_ - bet >= 0)
+            if (Chips_ - bet >= Constants.VALUE_OF_O)
             {
                 Chips_ -= bet;
             } else
@@ -40,7 +40,7 @@ namespace Batman
 
         public void Setbet(int bet) { Bet_ = bet; }
 
-        public void ClearBet() { Bet_ = 0; }
+        public void ClearBet() { Bet_ = Constants.VALUE_OF_O; }
 
         public void AddChips()
         {
@@ -50,13 +50,13 @@ namespace Batman
 
         public int GetHandValue()
         {
-            int value = 0;
-            int Ace_counter = 0;
+            int value = Constants.VALUE_OF_O;
+            int Ace_counter = Constants.VALUE_OF_O;
             foreach (Card card in Hand_)
             {
                 if (card.Face_ == Enums.Face.Ace)
                 {
-                    value += 11;
+                    value += Constants.VALUE_OF_11;
                     Ace_counter++;
                 }
                 else
@@ -64,9 +64,9 @@ namespace Batman
                     value += card.Value_;
                 }
             }
-            while (value > 21 && Ace_counter > 0)
+            while (value > Constants.VALUE_OF_21 && Ace_counter > Constants.VALUE_OF_O)
             {
-                value -= 10;
+                value -= Constants.VALUE_OF_10;
                 Ace_counter--;
 
             }
@@ -82,7 +82,7 @@ namespace Batman
             }
             else
             {
-                chipsWon = Bet_ * 2;
+                chipsWon = Bet_ * Constants.VALUE_OF_1;
             }
 
             Chips_ += chipsWon;

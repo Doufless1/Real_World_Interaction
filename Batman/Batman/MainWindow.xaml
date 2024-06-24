@@ -147,5 +147,7 @@
                 </TextBlock>
             </Border>
         </Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="662,656,0,0" TextWrapping="Wrap" Text="{Binding Player_Balance}" Foreground="Snow" VerticalAlignment="Top" Width="81"/>
+
     </Grid>
 </Window>
