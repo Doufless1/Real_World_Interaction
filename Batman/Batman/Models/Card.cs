@@ -16,8 +16,6 @@ namespace Batman
         {
             Suit_ = suit;
             Face_ = face;
-
-
             switch (Face_)
             {
                 case Face.Jack:

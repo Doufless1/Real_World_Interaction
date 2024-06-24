@@ -4,12 +4,9 @@ namespace Batman
     public class Deck : IDeck
     {
         private List<Card> Deck_;
-
-
         public Deck()
         {
             Deck_ = new List<Card>();
-            //    Shuffle();
             Initialize();
         }
 
@@ -18,7 +15,6 @@ namespace Batman
             List<Card> deck = new List<Card>();
             for (int k = Constants.VALUE_OF_O; k < Constants.VALUE_OF_2; k++)
             {
-
                 foreach (Suit suit in Enum.GetValues(typeof(Suit)))
                 {
                     foreach (Face face in Enum.GetValues(typeof(Face)))
@@ -32,8 +28,6 @@ namespace Batman
 
         public void Shuffle()
         {
-           
-
             Random rng = new Random();
 
             int n = Deck_.Count;
@@ -48,57 +42,23 @@ namespace Batman
         }
 
 
-
         public void Initialize()
         {
             var connect = new Models.tcpClient();
             connect.StartClient("NEW");
-            //Deck_ = Unshuffled();
-            //Shuffle();
         }
 
         public List<Card> DealHand()
         {
-
-            if (Deck_.Count < Constants.VALUE_OF_2)
-
             var connect=new Models.tcpClient();
             return connect.StartClient("Deal");
-            /*
-            if (Deck_.Count < 2)
-
-            {
-                throw new InvalidOperationException("Not enough cards to play the game");
-            }
-            List<Card> hand = new List<Card>();
-            hand.Add(Deck_[Constants.VALUE_OF_O]);
-            hand.Add(Deck_[Constants.VALUE_OF_1]);
-
-            Deck_.RemoveRange(Constants.VALUE_OF_O, Constants.VALUE_OF_2);
-
-            return hand;*/
         }
 
         public Card DrawCard()
         {
-
-            if (Deck_.Count == Constants.VALUE_OF_O)
-
             var connect = new Models.tcpClient();
             var hit = connect.StartClient("hit");
             return hit[0];
-            /*
-            if (Deck_.Count == 0)
- refs/remotes/destination/main
-            {
-                throw new InvalidOperationException("There is no more cards to draw!");
-            }
-            Card card = Deck_[Constants.VALUE_OF_O];
-
-            Deck_.Remove(card);
-
-            return card;
-            */
         }
 
     }

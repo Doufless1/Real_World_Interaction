@@ -17,17 +17,10 @@ namespace Batman
     public partial class BlackJackViewModel : ObservableObject
     {
 
-        // private readonly CurrencyService currencyService_;
-
-        //  private int Player_RemainingBalance => player_.Chips_ - player_.Bet_;
-
-        private TcpClient Client_;
-        private NetworkStream _stream;
-
         private bool betplaced_ = false;
         private bool check_if_hit_was_pressed = false;
         private bool check_if_double_was_pressed = false;
-
+        private bool Bet_pressed = false;
         private int dealers_hand_value;
 
         private int player_hand_value;
@@ -89,6 +82,7 @@ namespace Batman
             get => player_hand_value;
             set => SetProperty(ref player_hand_value, value);
             }
+
         public BlackJackViewModel()
         {
             deck_ = new Deck();
@@ -96,42 +90,26 @@ namespace Batman
             dealer_ = new Dealer();
             casino_ = new Casino(deck_, player_, dealer_);
             casino_.RoundEnded += Casino_RoundEnded;
+            player_.ChipsChanged += OnChipsChanged;
             Player_Balance = player_.Chips_;
             PlayerCardImages = new ObservableCollection<BitmapImage>();
             DealerCardImages = new ObservableCollection<BitmapImage>();
+            _statusMessage = "";
             InitializeCommands();
             InitializeSkins();
         }
+
+        private void OnChipsChanged(object? sender, int newChipsCount) {
+            Player_Balance = newChipsCount;
+        }
+
         private void Casino_RoundEnded(object? sender,string e)
         { 
        StatusMessage = e;
 
         }
 
-        private void ConnectToServer()
-        {
-            try
-            {
-                Client_ = new TcpClient("127.0.0.1", 13000);
-                _stream = Client_.GetStream();
-            } catch (Exception e) {
-                StatusMessage = ("Can't access Server");
-}
-        }
 
-        private void SendMessage(string message)
-        {
-            byte[] data = Encoding.ASCII.GetBytes(message);
-            _stream.Write(data, 0, data.Length);
-        }
-
-        private string Recive_Response()
-        {
-            byte[] data = new byte[256];
-            int bytes = _stream.Read(data, 0, data.Length);
-            string responseData = Encoding.ASCII.GetString(data,0,bytes);
-           return responseData;
-        }
         private BitmapImage GetCardImage(Card card)
         {
             string suit = card.Suit_ switch
@@ -142,6 +120,7 @@ namespace Batman
                 Suit.Spades => "sp",
                 _ => throw new InvalidOperationException("Invalid suit")
             };
+
             string value = card.Face_ switch
             {
                 Face.Ace => "1",
@@ -168,6 +147,7 @@ namespace Batman
             return new BitmapImage(new Uri(packUri));
         }
        
+
         private void UpdateCardDisplayForPlayer() 
         {
             PlayerCardImages.Clear();
@@ -177,9 +157,10 @@ namespace Batman
             }
             PlayerHandValue = player_.GetHandValue();
         }
+
+
         private void UpdateCardDisplayForDealer()
         {
-
             DealerCardImages.Clear();
             foreach (var card in dealer_.RevealedCards)
             {
@@ -196,14 +177,12 @@ namespace Batman
             DealersHandValue = dealer_.GetHandValue();
         }
 
+
   
         private void On_Stand()
         {
             dealer_.RevealCard(dealer_.RevealedCards);
         }
-        private void CanClick()
-
-        => casino_.Is_Hand_for_Splitting(player_.Hand_);
 
 
         private void ResetFlags()
@@ -211,7 +190,9 @@ namespace Batman
             check_if_hit_was_pressed = false;
             check_if_double_was_pressed = false;
             betplaced_ = false;
+            Bet_pressed = false;
         }
+
 
         void Check_If_Player_Bust_When_He_Gets_Card()
         {
@@ -220,6 +201,7 @@ namespace Batman
                 casino_.EndRound(RoundResult.PLAYER_BUST);
             }
         }
+
         private void Click_On_Double()
         {
             try
@@ -228,7 +210,7 @@ namespace Batman
                 {
                     throw new InvalidOperationException("You can't use Double Twice!");
                 }
-                if (!betplaced_)
+                if (!Bet_pressed)
                 {
                     throw new InvalidOperationException("Place a bet first!");
                 }
@@ -238,7 +220,7 @@ namespace Batman
                 }
                 if (player_.GetHandValue() >= Constants.VALUE_OF_21)
                 {
-                    throw new InvalidOperationException("You are exceding Limits");
+                    throw new InvalidOperationException("You are exceeding Limits");
                 }        
                     casino_.TakeActions("DOUBLE");
                     Check_If_Player_Bust_When_He_Gets_Card();
@@ -252,10 +234,15 @@ namespace Batman
             }
         }
 
+
         private void Click_On_Hit()
         {
             try
             {
+                if (!Bet_pressed)
+                {
+                    throw new InvalidOperationException("You have to Press BET");
+                }
                 if (check_if_double_was_pressed)
                 {
                     throw new InvalidOperationException("You can't Hit after Double!");
@@ -277,6 +264,8 @@ namespace Batman
                 StatusMessage = $"{ex.Message}";
             }
         }
+
+
         private void Click_On_Stand()
         {
             try
@@ -301,6 +290,7 @@ namespace Batman
             }
         }
 
+
         private void Click_On_Fold()
         { 
             casino_.TakeActions("FOLD");
@@ -312,6 +302,7 @@ namespace Batman
         ResetFlags();
         }
 
+
         private void Start_the_Round_After_betting()
         {
             try
@@ -322,6 +313,7 @@ namespace Batman
                     UpdateCardDisplayForDealer();
                     UpdateCardDisplayForPlayer();
                     betplaced_ = false;
+                    Bet_pressed = true;
                 }
                 else
                 {
@@ -333,6 +325,8 @@ namespace Batman
                 StatusMessage = $"{ex.Message}";
             }
         }
+
+
         private void InitializeCommands()
         {
             HitCommand = new RelayCommand(Click_On_Hit);
@@ -349,37 +343,34 @@ namespace Batman
        
         private void Bet_10()
         {
-            casino_.TakeBet("10");
-            Player_Add_Bet += Constants.VALUE_OF_10;
-            Player_Balance = player_.Chips_;
-            betplaced_ = true;
+            PlaceBet(Constants.VALUE_OF_10);
         }
 
         private void Bet_20()
         {
-            casino_.TakeBet("20");
-            Player_Add_Bet += Constants.VALUE_OF_20;
-            Player_Balance = player_.Chips_;
-            betplaced_ = true;
+            PlaceBet(Constants.VALUE_OF_20); 
         }
 
         private void Bet_50()
         {
-            
-            casino_.TakeBet("50");
-            Player_Add_Bet += Constants.VALUE_OF_50;
-            Player_Balance = player_.Chips_;
-            betplaced_ = true;
+
+            PlaceBet(Constants.VALUE_OF_50); 
         }
 
         private void Bet_100()
         {
+            PlaceBet(Constants.VALUE_OF_100);
+        }
+
+
+        private void PlaceBet(int amount)
+        {
             try
             {
-                if (player_.Chips_ >= player_.Bet_)
+                if (player_.Chips_ >= amount)
                 {
-                    casino_.TakeBet("100");
-                    Player_Add_Bet += Constants.VALUE_OF_100;
+                    casino_.TakeBet(amount.ToString());
+                    Player_Add_Bet += amount;
                     Player_Balance = player_.Chips_;
                     betplaced_ = true;
                 }
@@ -388,29 +379,17 @@ namespace Batman
                     throw new InvalidOperationException("You don't have enough chips!");
                 }
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 StatusMessage = $"{ex.Message}";
             }
         }
-     
+
         private void InitializeSkins()
         {
       
                 DealerCardImages.Add(new BitmapImage(new Uri("pack://application:,,,/Pictures/cardskin.png")));
             
         }
-
-        /*private bool CanClick()
-            => FirstName == "Kevin";*/
-
-
-        /*        public event PropertyChangedEventHandler? PropertyChanged; //Everytime some of the propertie changes it says okey I am gonna update the context
-
-                [RelayCommand]
-                private void Click()
-                {
-                    FirstName = "Robert";
-                }*/
     }
 }

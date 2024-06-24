@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Batman.ViewModels"
         mc:Ignorable="d"
-        FontSize="16" Title="MainWindow"
-        Height="900"
+        FontSize="16" Title="BlackJack Casino"
+        Height="840"
         Width="900"
        ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+         Icon="pack://application:,,,/Pictures/blackjack.webp">
 
     <Grid>
         <!-- Background Image -->
@@ -35,7 +36,7 @@
             <TextBlock Text="{Binding StatusMessage}"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
-                   Margin="572,753,0,0"
+                   Margin="572,681,0,0"
                    FontSize="19"
                    Foreground="White"
                    Padding="10"
@@ -132,22 +133,24 @@
                 <Button Content="FOLD" Command="{Binding FoldCommand}" Margin="10"/>
                 <Button Content="DOUBLE" Command="{Binding DoubleCommand}" Margin="10"/>
             </StackPanel>
-
+            <Border BorderThickness="1" BorderBrush="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="127,684,0,0" Height="25" Width="117">
+                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Foreground="White" VerticalAlignment="Center" FontWeight="Bold" Width="117"/>
+            </Border>
             <TextBlock TextWrapping="Wrap" Foreground="Red" Text="Player 1" Margin="389,0,0,315" FontFamily="Cyan" FontWeight="Bold" FontSize="22" VerticalAlignment="Bottom" HorizontalAlignment="Left" RenderTransformOrigin="0.5,1.0"/>
             <TextBlock HorizontalAlignment="Left" Margin="300,100,0,0" TextWrapping="Wrap" Text="{Binding DealersHandValue}" Background="White" VerticalAlignment="Top" Width="20"/>
             <TextBlock HorizontalAlignment="Left" Margin="298,325,0,0" TextWrapping="Wrap" Text="{Binding PlayerHandValue}" Background="White" VerticalAlignment="Top" Width="22"/>
-            <Border BorderThickness="1" BorderBrush="DarkCyan" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="225,740,0,0">
-                <TextBlock Text="{Binding Player_Add_Bet}" TextWrapping="Wrap" Width="31" Foreground="Black" Height="24" FontWeight="Bold">
+            <Border BorderThickness="1" BorderBrush="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="280,710,0,0">
+                <TextBlock Text="{Binding Player_Add_Bet}" TextWrapping="Wrap" Width="31" Foreground="Snow" Height="24" FontWeight="Bold">
                     <TextBlock.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="Black"/>
-                            <GradientStop Color="#FF104EB3" Offset="0"/>
+                            <GradientStop Color="Snow"/>
+                            <GradientStop Color="Black" Offset="0"/>
                         </LinearGradientBrush>
                     </TextBlock.Background>
                 </TextBlock>
             </Border>
         </Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="662,656,0,0" TextWrapping="Wrap" Text="{Binding Player_Balance}" Foreground="Snow" VerticalAlignment="Top" Width="81"/>
+
 
     </Grid>
 </Window>

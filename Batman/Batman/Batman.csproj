@@ -13,6 +13,7 @@
 		<Resource Include="Pictures\*.gif" />
 		<None Remove="Pictures\backgreen.png" />
 		<None Remove="Pictures\background.jpg" />
+		<None Remove="Pictures\blackjack.webp" />
 		<None Remove="Pictures\funi.jpg" />
 		<None Remove="Pictures\splashpage.jpg" />
 		<EmbeddedResource Include="Pictures\cardskin.png" />
@@ -39,6 +40,7 @@
     <Resource Include="Pictures\5100.webp" />
     <Resource Include="Pictures\backgreen.png" />
     <Resource Include="Pictures\background.jpg" />
+    <Resource Include="Pictures\blackjack.webp" />
     <Resource Include="Pictures\cl1.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

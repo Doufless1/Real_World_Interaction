@@ -10,9 +10,6 @@ namespace Batman.Models
 {
     public class tcpClient
     {
-      
-        
-
         public List<Card> StartClient(string message)
         {
             try
@@ -29,12 +26,6 @@ namespace Batman.Models
                 // Loop to send and receive data
                 //while (true)
                 //{
-                    
-
-                    
-
-                    
-
                     // Receive response from the server
                     data = new byte[256];
                     int bytes = stream.Read(data, 0, data.Length);
@@ -64,10 +55,6 @@ namespace Batman.Models
             Console.Read();
 
             return new List<Card>();
-        }
-
-        
-
-        
+        }     
     }
 }

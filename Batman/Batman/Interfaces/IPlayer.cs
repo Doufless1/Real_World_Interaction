@@ -8,6 +8,7 @@ namespace Batman
 {
     public interface IPlayer
     {
+        event EventHandler<int> ChipsChanged;
         int Chips_ { get; set; }
         int Bet_ { get; set; }
         int Wins_ { get; set; }
@@ -20,7 +21,7 @@ namespace Batman
         //void Setbet(int bet);
         void ClearBet();
         public int GetHandValue();
-       // public void WriteHand();
+        // public void WriteHand();
         public int WinBet(bool blackjack);
         public void AddChips();
     }

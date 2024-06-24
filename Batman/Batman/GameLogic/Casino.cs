@@ -13,13 +13,13 @@ namespace Batman.Enums
 {
     public class Casino
     {
-     //   private int MinimumBet { get; } = 10;
+
         private IDeck deck_;// = new Deck();
         private IPlayer player_;// = new Player();
         private IDealer dealer_;
 
         public EventHandler<string> RoundEnded;
-    
+
 
         public Casino(IDeck deck, IPlayer player, IDealer dealer)
         {
@@ -50,10 +50,10 @@ namespace Batman.Enums
                     else if (hand[Constants.VALUE_OF_1].Face_ == Face.Ace && hand[Constants.VALUE_OF_O].Value_ == Constants.VALUE_OF_1) return true;
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 OnRoundEnded($"{ex.Message}");
-               
+
             }
             return false;
         }
@@ -74,14 +74,15 @@ namespace Batman.Enums
                     throw new InvalidProgramException("Something Went wrong in the code!!!");
                 }
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 OnRoundEnded($"{ex.Message}");
-               
+
             }
             return false;
         }
-        
-       private void AdjustAceValue(List<Card> hand)
+
+        private void AdjustAceValue(List<Card> hand)
         {
             if (hand.Count == Constants.VALUE_OF_2 && hand.All(card => card.Face_ == Face.Ace))
             {
@@ -95,8 +96,6 @@ namespace Batman.Enums
             //TODO: I feel like you are doing it wrong the thing is that in poker only one of the dealers hands is down
             try
             {
-
-
                 deck_.Initialize();
 
                 player_.Hand_ = deck_.DealHand();
@@ -106,10 +105,11 @@ namespace Batman.Enums
                 AdjustAceValue(dealer_.HiddenCards);
                 AdjustAceValue(dealer_.RevealedCards);
             }
-            catch(Exception ex) { 
-            OnRoundEnded($"{ex.Message}");
+            catch (Exception ex)
+            {
+                OnRoundEnded($"{ex.Message}");
             }
-            }
+        }
 
         public bool TakeBet(string bet_in_string)
         {
@@ -130,7 +130,7 @@ namespace Batman.Enums
                 }
                 throw new InvalidOperationException("Exceeding balance");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 OnRoundEnded($"{ex.Message}");
                 return false;
@@ -170,10 +170,10 @@ namespace Batman.Enums
                             }
                             else
                             {
-                             
+
                                 throw new InvalidOperationException("You cant DOUBLE dont have Enought Chips to do that!!!");
                             }
-                          
+
                             break;
                         case "SPLIT":
                             if (Is_Hand_for_Splitting(player_.Hand_) && player_.Chips_ >= player_.Bet_)
@@ -212,91 +212,61 @@ namespace Batman.Enums
                     }
                 } while (!action.ToUpper().Equals("STAND") && !action.ToUpper().Equals("DOUBLE")
                     && !action.ToUpper().Equals("FOLD") && player_.GetHandValue() <= Constants.VALUE_OF_21 && hit != true);
-            }catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 OnRoundEnded($"{ex.Message}");
                 throw;
             }
         }
+        /*   private void Take_Action_After_Spitting_The_Hand(List<Card> hand_splitted)
+           {
+               string action;
+               do
+               {
+                   switch (action.ToUpper())
+                   {
+                       case "HIT":
+                           player_.Hand_.Add(deck_.DrawCard());
+                           break;
+                       case "STAND":
+                           break;
+                       case "FOLD": // its not surrender its fold
+                           player_.Hand_.Clear();
+                           break;
+                       case "DOUBLE":
+                           if (player_.Chips_ >= player_.Bet_)
+                           {
+                               player_.AddBet(player_.Bet_);
+                           }
+                           else
+                           {
+                               throw new InvalidOperationException("You cant DOUBLE dont have Enought Chips to do that!!!");
+                           }
+                           player_.Hand_.Add(deck_.DrawCard());
+                           break;
+                       default:
+                           Console.WriteLine("Valid Moves:");
+                           Console.WriteLine("Hit, Stand, Fold");
+                           Console.WriteLine("Press any key to continue.");
+                           Console.ReadKey();
+                           break;
+                   }
 
-
-     /*   private void Take_Action_After_Spitting_The_Hand(List<Card> hand_splitted)
-        {
-            string action;
-            do
-            {
-                switch (action.ToUpper())
-                {
-                    case "HIT":
-                        player_.Hand_.Add(deck_.DrawCard());
-                        break;
-                    case "STAND":
-                        break;
-                    case "FOLD": // its not surrender its fold
-                        player_.Hand_.Clear();
-                        break;
-                    case "DOUBLE":
-                        if (player_.Chips_ >= player_.Bet_)
-                        {
-                            player_.AddBet(player_.Bet_);
-                        }
-                        else
-                        {
-                            throw new InvalidOperationException("You cant DOUBLE dont have Enought Chips to do that!!!");
-                        }
-                        player_.Hand_.Add(deck_.DrawCard());
-                        break;
-                    default:
-                        Console.WriteLine("Valid Moves:");
-                        Console.WriteLine("Hit, Stand, Fold");
-                        Console.WriteLine("Press any key to continue.");
-                        Console.ReadKey();
-                        break;
-                }
-
-                if (player_.GetHandValue() > 21)
-                {
-                    foreach (Card card in player_.Hand_)
-                    {
-                        if (card.Value_ == 11) // Only a soft ace can have a value of 11
-                        {
-                            card.Value_ = 1;
-                            break;
-                        }
-                    }
-                }
-            } while (!action.ToUpper().Equals("STAND") && !action.ToUpper().Equals("FOLD") && !action.ToUpper().Equals("DOUBLE")
-                && player_.GetHandValue() <= 21);
-        }*/
-        public void StartRound()
-        {
-            if (TakeBet("9"))
-            {
-                EndRound(RoundResult.INVALID_BET);
-                return;
-            }
- 
-          //  InitializeHand();
-
-        //   dealer_.RevealCard();
-
-
-            /*player_.WriteHand();
-            dealer_.WriteHand();*/
-
-            player_.HandsCompleted_++;
-
-
-            List<List<Card>> handsToPlay = new List<List<Card>> { player_.Hand_ };
-            if (player_.SplitHands_ != null && player_.SplitHands_.Count > Constants.VALUE_OF_O)
-            {
-                handsToPlay.AddRange(player_.SplitHands_); // we ensure that each item inside the SplitHands is added to handstoplay as individual items
-            }
-            for (int i = 0; i < handsToPlay.Count; i++)
-            {
-                player_.Hand_ = handsToPlay[i];
-                ProcessHand(player_.Hand_);
-            }
-        }
+                   if (player_.GetHandValue() > 21)
+                   {
+                       foreach (Card card in player_.Hand_)
+                       {
+                           if (card.Value_ == 11) // Only a soft ace can have a value of 11
+                           {
+                               card.Value_ = 1;
+                               break;
+                           }
+                       }
+                   }
+               } while (!action.ToUpper().Equals("STAND") && !action.ToUpper().Equals("FOLD") && !action.ToUpper().Equals("DOUBLE")
+                   && player_.GetHandValue() <= 21);
+           }*/
         private int GetHandValue(List<Card> hand)
         {
             int value = Constants.VALUE_OF_O;
@@ -356,8 +326,8 @@ namespace Batman.Enums
             if (GetHandValue(hand) > dealer_.GetHandValue())
             {
                 player_.Wins_++;
-                    EndRound(RoundResult.PLAYER_WIN);
-                
+                EndRound(RoundResult.PLAYER_WIN);
+
             }
             else if (dealer_.GetHandValue() > Constants.VALUE_OF_21)
             {
@@ -381,19 +351,19 @@ namespace Batman.Enums
             switch (result)
             {
                 case RoundResult.PUSH:
-                    player_.AddChips();             
+                    player_.AddChips();
                     message = "Player and Dealer Push.";
                     break;
                 case RoundResult.PLAYER_WIN:
                     message = $"Player Wins {player_.WinBet(false)} chips";
-                   
+
                     break;
                 case RoundResult.PLAYER_BUST:
 
                     message = $"Player Busts Loses {player_.Bet_} chips";
                     break;
                 case RoundResult.PLAYER_BLACKJACK:
-                    message = $"Player Wins {player_.WinBet(true)} chips";               
+                    message = $"Player Wins {player_.WinBet(true)} chips";
                     break;
                 case RoundResult.DEALER_WIN:
 
@@ -416,7 +386,6 @@ namespace Batman.Enums
                 player_ = new Player();
             }
             OnRoundEnded(message);
-        //    StartRound();
         }
 
     }

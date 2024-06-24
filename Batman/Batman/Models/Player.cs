@@ -8,8 +8,22 @@ namespace Batman
 {
     public class Player : IPlayer
     {
-        //public string Name_="";
-        public int Chips_ { get; set; } = 500;
+        public event EventHandler<int> ChipsChanged;
+
+        private int chips_;
+
+        public int Chips_
+        {
+            get => chips_;
+            set
+            {
+  
+                    chips_ = value;
+                    OnChipsChanged(chips_);
+             
+            }
+        }
+
         public int Bet_ { get; set; }
         public int Wins_ { get; set; }
         public int HandsCompleted_ { get; set; } = Constants.VALUE_OF_1;
@@ -18,12 +32,17 @@ namespace Batman
 
         public List<List<Card>> SplitHands_ { get; set; }
 
-
         public Player()
         {
             Hand_ = new List<Card>();
             SplitHands_ = new List<List<Card>>();
             Hand_.Clear();
+            Chips_ = 500;
+        }
+
+        protected virtual void OnChipsChanged(int newChipCount)
+        {
+            ChipsChanged?.Invoke(this, newChipCount);
         }
 
         public void AddBet(int bet)
@@ -32,7 +51,8 @@ namespace Batman
             if (Chips_ - bet >= Constants.VALUE_OF_O)
             {
                 Chips_ -= bet;
-            } else
+            }
+            else
             {
                 throw new InvalidOperationException("Not enough chips to place bet.");
             }
@@ -89,18 +109,5 @@ namespace Batman
             ClearBet();
             return chipsWon;
         }
-
-     /*   public void WriteHand()
-        {
-            Console.WriteLine($"Players's Hand ( {GetHandValue()} ):");
-            foreach (Card card in Hand_)
-            {
-           //     card.Description();
-            }
-        }*/
-
-
-
-
     }
 }
