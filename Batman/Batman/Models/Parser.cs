@@ -13,9 +13,12 @@ namespace Batman.Models
         {
             int start = text.IndexOf("(") + 1;//+ 5
             int i = 0;
+            const char nullChar = '\0';
             var cards = new List<Card>();
             foreach (char t in text)
-            { 
+            //(text[i] != nullChar)
+            {
+
                 if (t == ';')
                 {
                     var c = text.Substring(start, i - start);
