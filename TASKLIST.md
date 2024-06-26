@@ -16,7 +16,6 @@ Reality
 |     Task                                   |     Konstantin |     Onion |     Comments                                                                                               |
 |--------------------------------------------|:---------:|:-------:|------------------------------------------------------------------------------------------------------------|
 | Game Logic Basics                          |    50%    |   50%   | Onno made the most of the logic. Konstantin made its so its useful for the WPF.                                              |
-| Sever Setup                          |    0%    |   100%   | Onno Created all the server and Client logic and the server holds the deck        |
-
-| Making the UI on WPF                    |    100%    |   0%   | Konstantin Created the whole UI for everything. |                                                              
+| Sever Setup                                |    0%    |   100%   | Onno Created all the server and Client logic and the server holds the deck        |
+| Making the UI on WPF                    |    100%    |   0%   | Konstantin Created the whole UI for everything. |                                    
 | Testing and Quality Checking               |    50%   |    50%   | We tested everything sepretly. Onno firstly tested if game logic of the game works perfectly. Further Konstantin tested if the UI works with all the exceptions. Lastly we implimented everything together and tested it.
