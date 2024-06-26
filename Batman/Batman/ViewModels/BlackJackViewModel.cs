@@ -21,6 +21,7 @@ namespace Batman
         private bool check_if_hit_was_pressed = false;
         private bool check_if_double_was_pressed = false;
         private bool Bet_pressed = false;
+        private bool fold_pressed = false;
         private int dealers_hand_value;
 
         private int player_hand_value;
@@ -30,7 +31,7 @@ namespace Batman
         private string _statusMessage;
         private int player_balance;
 
-        public IRelayCommand? DoubleCommand { get; private set; }
+        public IRelayCommand? DoubleCommand { get; private set; } // IRelayCommand and RelayCommand is used to check if we can execute command like buttons and others in MVVM
         public IRelayCommand? HitCommand { get; private set; }
         public IRelayCommand? StandCommand { get; private set; }
 
@@ -47,19 +48,22 @@ namespace Batman
 
         public IRelayCommand? BetCommand { get; private set; }
 
-        private readonly IDeck deck_;
-        private  IPlayer player_ { get;  set; }
-        private readonly IDealer dealer_;
-        private readonly Casino casino_;
+        private  IDeck deck_ { get; set; }
+        private IPlayer player_ { get; set; }
+        private  IDealer dealer_ { get; set; }
+        private Casino casino_ { get; set; }
 
 
-        public ObservableCollection<BitmapImage> PlayerCardImages { get; set; }
+        public ObservableCollection<BitmapImage> PlayerCardImages { get; set; } // this provides some kind of notification when item is added removed
         public ObservableCollection<BitmapImage> DealerCardImages { get; set; }
 
-        private int Player_Balance
+        public int Player_Balance
         {
             get => player_balance;
-            set => SetProperty(ref player_balance, value); // ref is use to pass the parameter by reference it means that changes are made to the parameteer will effect the original variable
+            set
+            {
+                SetProperty(ref player_balance, value); // ref is use to pass the parameter by reference it means that changes are made to the parameteer will effect the original variable
+            }                                      
         }
         public int Player_Add_Bet
         {
@@ -78,10 +82,11 @@ namespace Batman
             set => SetProperty(ref dealers_hand_value, value);
         }
 
-        public int PlayerHandValue{
+        public int PlayerHandValue
+        {
             get => player_hand_value;
             set => SetProperty(ref player_hand_value, value);
-            }
+        }
 
         public BlackJackViewModel()
         {
@@ -90,22 +95,43 @@ namespace Batman
             dealer_ = new Dealer();
             casino_ = new Casino(deck_, player_, dealer_);
             casino_.RoundEnded += Casino_RoundEnded;
-            player_.ChipsChanged += OnChipsChanged;
+         //   player_.ChipsChanged += OnChipsChanged;
             Player_Balance = player_.Chips_;
-            PlayerCardImages = new ObservableCollection<BitmapImage>();
+            PlayerCardImages = new ObservableCollection<BitmapImage>(); 
             DealerCardImages = new ObservableCollection<BitmapImage>();
             _statusMessage = "";
             InitializeCommands();
             InitializeSkins();
         }
 
-        private void OnChipsChanged(object? sender, int newChipsCount) {
+
+        public void ResetGame()
+        {
+            deck_ = new Deck();
+            player_ = new Player();
+            dealer_ = new Dealer();
+            casino_ = new Casino(deck_, player_, dealer_);
+            casino_.RoundEnded += Casino_RoundEnded;
+            player_.ChipsChanged += OnChipsChanged;
+            Player_Balance = player_.Chips_;
+            PlayerCardImages.Clear();
+            DealerCardImages.Clear();
+            _statusMessage = "";
+            Player_Add_Bet = 0;
+            PlayerHandValue = 0;
+            DealersHandValue = 0;
+            player_.Wins_ = 0;
+            ResetFlags();
+        }
+
+       private void OnChipsChanged(object? sender, int newChipsCount)
+        {
             Player_Balance = newChipsCount;
         }
 
-        private void Casino_RoundEnded(object? sender,string e)
-        { 
-       StatusMessage = e;
+        private void Casino_RoundEnded(object? sender, string e)
+        {
+            StatusMessage = e;
 
         }
 
@@ -142,13 +168,11 @@ namespace Batman
             string filename = $"{suit}{value}.gif";
             string packUri = $"pack://application:,,,/Pictures/{filename}";
 
-       
-            Debug.WriteLine($"Loading image from: {packUri}");
             return new BitmapImage(new Uri(packUri));
         }
-       
 
-        private void UpdateCardDisplayForPlayer() 
+
+        private void UpdateCardDisplayForPlayer()
         {
             PlayerCardImages.Clear();
             foreach (var card in player_.Hand_)
@@ -167,18 +191,20 @@ namespace Batman
                 if (dealer_.RevealedCards.Count() == Constants.VALUE_OF_1)
                 {
                     DealerCardImages.Add(GetCardImage(card));
-                   
+
                     InitializeSkins();
-                } else{
+                }
+                else
+                {
                     DealerCardImages.Add(GetCardImage(card));
-                   
+
                 }
             }
             DealersHandValue = dealer_.GetHandValue();
         }
 
 
-  
+
         private void On_Stand()
         {
             dealer_.RevealCard(dealer_.RevealedCards);
@@ -191,6 +217,8 @@ namespace Batman
             check_if_double_was_pressed = false;
             betplaced_ = false;
             Bet_pressed = false;
+            Player_Add_Bet = 0;
+            player_.Wins_ = 0;
         }
 
 
@@ -221,13 +249,14 @@ namespace Batman
                 if (player_.GetHandValue() >= Constants.VALUE_OF_21)
                 {
                     throw new InvalidOperationException("You are exceeding Limits");
-                }        
-                    casino_.TakeActions("DOUBLE");
-                    Check_If_Player_Bust_When_He_Gets_Card();
-                    UpdateCardDisplayForPlayer();
-                    check_if_double_was_pressed = true;
-                
-            } catch (Exception ex)
+                }
+                casino_.TakeActions("DOUBLE");
+                Check_If_Player_Bust_When_He_Gets_Card();
+                UpdateCardDisplayForPlayer();
+                check_if_double_was_pressed = true;
+
+            }
+            catch (Exception ex)
             {
                 check_if_double_was_pressed = false;
                 StatusMessage = $"{ex.Message}";
@@ -247,13 +276,14 @@ namespace Batman
                 {
                     throw new InvalidOperationException("You can't Hit after Double!");
                 }
-                if (player_.GetHandValue() < Constants.VALUE_OF_21 )
+                if (player_.GetHandValue() < Constants.VALUE_OF_21)
                 {
                     casino_.TakeActions("HIT");
                     Check_If_Player_Bust_When_He_Gets_Card();
                     UpdateCardDisplayForPlayer();
                     check_if_hit_was_pressed = true;
-                } else
+                }
+                else
                 {
 
                     throw new InvalidOperationException("You already BUSTED!");
@@ -292,14 +322,19 @@ namespace Batman
 
 
         private void Click_On_Fold()
-        { 
-            casino_.TakeActions("FOLD");
+        {
+            if (Player_Balance == 0 && player_.Wins_ == 0)
+            {
+                fold_pressed = true;
+               ResetGame();
+            } else if (!fold_pressed){
+                casino_.TakeActions("FOLD");
 
-            UpdateCardDisplayForPlayer();
-            UpdateCardDisplayForDealer();
-            dealer_.RevealedCards.Clear();
-            Player_Add_Bet = 0;
-        ResetFlags();
+                UpdateCardDisplayForPlayer();
+                UpdateCardDisplayForDealer();
+                dealer_.RevealedCards.Clear();
+                ResetFlags();
+            }
         }
 
 
@@ -314,6 +349,7 @@ namespace Batman
                     UpdateCardDisplayForPlayer();
                     betplaced_ = false;
                     Bet_pressed = true;
+                    fold_pressed = false;
                 }
                 else
                 {
@@ -338,9 +374,9 @@ namespace Batman
             Bet_50_Euro = new RelayCommand(Bet_50);
             Bet_20_Euro = new RelayCommand(Bet_20);
             Bet_100_Euro = new RelayCommand(Bet_100);
-            
+
         }
-       
+
         private void Bet_10()
         {
             PlaceBet(Constants.VALUE_OF_10);
@@ -348,13 +384,12 @@ namespace Batman
 
         private void Bet_20()
         {
-            PlaceBet(Constants.VALUE_OF_20); 
+            PlaceBet(Constants.VALUE_OF_20);
         }
 
         private void Bet_50()
         {
-
-            PlaceBet(Constants.VALUE_OF_50); 
+            PlaceBet(Constants.VALUE_OF_50);
         }
 
         private void Bet_100()
@@ -362,11 +397,15 @@ namespace Batman
             PlaceBet(Constants.VALUE_OF_100);
         }
 
-
         private void PlaceBet(int amount)
         {
             try
             {
+                if (Bet_pressed)
+                {
+                    throw new InvalidOperationException("You are already playing.");
+                }
+
                 if (player_.Chips_ >= amount)
                 {
                     casino_.TakeBet(amount.ToString());
@@ -387,9 +426,8 @@ namespace Batman
 
         private void InitializeSkins()
         {
-      
-                DealerCardImages.Add(new BitmapImage(new Uri("pack://application:,,,/Pictures/cardskin.png")));
-            
+            DealerCardImages.Add(new BitmapImage(new Uri("pack://application:,,,/Pictures/cardskin.png")));
+
         }
     }
 }

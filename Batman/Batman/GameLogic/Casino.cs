@@ -113,8 +113,6 @@ namespace Batman.Enums
 
         public bool TakeBet(string bet_in_string)
         {
-
-
             try
             {
                 // why did u put it with Int32 why not basic int 
@@ -173,27 +171,6 @@ namespace Batman.Enums
 
                                 throw new InvalidOperationException("You cant DOUBLE dont have Enought Chips to do that!!!");
                             }
-
-                            break;
-                        case "SPLIT":
-                            if (Is_Hand_for_Splitting(player_.Hand_) && player_.Chips_ >= player_.Bet_)
-                            {
-                                player_.AddBet(player_.Chips_);
-                                List<Card> splitHand1 = new List<Card>() { player_.Hand_[Constants.VALUE_OF_O], deck_.DrawCard() };
-                                List<Card> splitHand2 = new List<Card>() { player_.Hand_[Constants.VALUE_OF_1], deck_.DrawCard() };
-
-                                //       Take_Action_After_Spitting_The_Hand(splitHand1);
-                                //     Take_Action_After_Spitting_The_Hand(splitHand2);
-
-
-                                player_.SplitHands_ = new List<List<Card>> { splitHand1, splitHand2 };
-
-                            }
-                            else
-                            {
-                                throw new InvalidOperationException("You are not able to SPLIT u need your balance to be equal to your Bet to do that");
-
-                            }
                             break;
                         default:
                             throw new ArgumentException("$Invalid action{action}", nameof(action));
@@ -219,54 +196,7 @@ namespace Batman.Enums
                 throw;
             }
         }
-        /*   private void Take_Action_After_Spitting_The_Hand(List<Card> hand_splitted)
-           {
-               string action;
-               do
-               {
-                   switch (action.ToUpper())
-                   {
-                       case "HIT":
-                           player_.Hand_.Add(deck_.DrawCard());
-                           break;
-                       case "STAND":
-                           break;
-                       case "FOLD": // its not surrender its fold
-                           player_.Hand_.Clear();
-                           break;
-                       case "DOUBLE":
-                           if (player_.Chips_ >= player_.Bet_)
-                           {
-                               player_.AddBet(player_.Bet_);
-                           }
-                           else
-                           {
-                               throw new InvalidOperationException("You cant DOUBLE dont have Enought Chips to do that!!!");
-                           }
-                           player_.Hand_.Add(deck_.DrawCard());
-                           break;
-                       default:
-                           Console.WriteLine("Valid Moves:");
-                           Console.WriteLine("Hit, Stand, Fold");
-                           Console.WriteLine("Press any key to continue.");
-                           Console.ReadKey();
-                           break;
-                   }
-
-                   if (player_.GetHandValue() > 21)
-                   {
-                       foreach (Card card in player_.Hand_)
-                       {
-                           if (card.Value_ == 11) // Only a soft ace can have a value of 11
-                           {
-                               card.Value_ = 1;
-                               break;
-                           }
-                       }
-                   }
-               } while (!action.ToUpper().Equals("STAND") && !action.ToUpper().Equals("FOLD") && !action.ToUpper().Equals("DOUBLE")
-                   && player_.GetHandValue() <= 21);
-           }*/
+      
         private int GetHandValue(List<Card> hand)
         {
             int value = Constants.VALUE_OF_O;
@@ -383,7 +313,6 @@ namespace Batman.Enums
             if (player_.Chips_ <= Constants.VALUE_OF_O)
             {
                 message = $"Player is broke {player_.Chips_} chips left";
-                player_ = new Player();
             }
             OnRoundEnded(message);
         }

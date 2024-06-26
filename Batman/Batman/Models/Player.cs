@@ -98,11 +98,11 @@ namespace Batman
             int chipsWon;
             if (blackjack)
             {
-                chipsWon = (int)Math.Floor(Bet_ * 1.5);
+                chipsWon = (int)Math.Floor(Bet_ * 2.5);
             }
             else
             {
-                chipsWon = Bet_ * Constants.VALUE_OF_1;
+                chipsWon = Bet_ * Constants.VALUE_OF_2;
             }
 
             Chips_ += chipsWon;

@@ -21,15 +21,15 @@
 	</ItemGroup>
 	
   <ItemGroup>
+    <Content Include="bin\Debug\net8.0-windows\Batman.deps.json" />
+    <Content Include="bin\Debug\net8.0-windows\Batman.runtimeconfig.json" />
     <Content Include="bin\Debug\net8.0-windows\Pictures\cardskin.png" />
+    <Content Include="bin\Debug\net8.0-windows\Pictures\funi.jpg" />
+    <Content Include="bin\Debug\net8.0-windows\Pictures\splashpage.jpg" />
     <Content Include="Pictures\cardskin.png" />
     <Content Include="Pictures\funi.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="bin\Debug\net8.0-windows\Pictures\5100.webp" />
   </ItemGroup>
 
   <ItemGroup>
@@ -47,6 +47,14 @@
     <Content Include="Pictures\splashpage.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bin\Debug\net8.0-windows\Batman.dll" />
+    <None Include="bin\Debug\net8.0-windows\Batman.exe" />
+    <None Include="bin\Debug\net8.0-windows\Batman.pdb" />
+    <None Include="bin\Debug\net8.0-windows\CommunityToolkit.Mvvm.dll" />
+    <None Include="bin\Debug\net8.0-windows\Pictures\5100.webp" />
   </ItemGroup>
 
   <ItemGroup>
